@@ -11,10 +11,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ForumApp
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
         Users usr = new Users();
-        public Login()
+        public LoginForm()
         {
             InitializeComponent();
         }

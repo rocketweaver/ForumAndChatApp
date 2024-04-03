@@ -13,22 +13,13 @@ namespace ForumApp
 {
     public partial class Home : Form
     {
-        private const int WS_VSCROLL = 0x200000;
+        Posts post = new Posts();
         public Home()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.ResizeRedraw, true);
-            this.Padding = new Padding(0, 0, 0, 50);
-        }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.Style |= WS_VSCROLL; // Add WS_VSCROLL style to enable vertical scrollbar
-                return cp;
-            }
+            logoutBtn.FlatStyle = FlatStyle.Flat;
+            logoutBtn.FlatAppearance.BorderSize = 0;
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
@@ -37,60 +28,115 @@ namespace ForumApp
 
             this.Hide();
 
-            Login login = new Login();
+            LoginForm login = new LoginForm();
             login.Closed += (s, args) => this.Close();
             login.Show();
         }
 
-        private string[] panelTitles = { "Panel 1", "Panel 2", "Panel 3", "Panel 4", "Panel 5", "Panel 6" };
-        private DateTime[] panelDates = { DateTime.Now, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2),DateTime.Now.AddDays(3), DateTime.Now.AddDays(4), DateTime.Now.AddDays(5) };
-
-        private void LoopThroughPanelsAndTextboxes()
+        private void MakePanels(Dictionary<string, (string title, DateTime date)> filteredPosts = null)
         {
-            for (int i = 0; i < panelTitles.Length; i++)
+            flowLayoutPosts.Controls.Clear();
+
+            int panelSpacing = 20;
+            int containerWidth = flowLayoutPosts.ClientSize.Width;
+
+            Dictionary<string, (string title, DateTime date)> panelData;
+
+            if (filteredPosts != null)
             {
+                panelData = filteredPosts;
+            } else
+            {
+                panelData = post.GetPanelData();
+            }
+
+            for (int i = 0; i < panelData.Count; i++)
+            {
+                var kvp = panelData.ElementAt(i);
+                var panelId = kvp.Key;
+                var panelInfo = kvp.Value;
+
                 var panel = new Panel
                 {
-                    Location = new Point(25, 100 + (i * (60 + 5))),
-                    Size = new Size(473, 40),
+                    Name = panelId,
+                    Tag = panelId,
+                    Size = new Size(flowLayoutPosts.Width - 39, 40),
+                    Margin = i == 0 ? new Padding(10, 20, 5, 20) : new Padding(10, 5, 10, 20),
                     BackColor = Color.White,
-                    BorderStyle = BorderStyle.FixedSingle
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Cursor = Cursors.Hand,
                 };
 
                 var titleLabel = new Label
                 {
-                    Text = panelTitles[i],
+                    Text = panelInfo.title,
                     Location = new Point(10, 10),
-                    Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                    ForeColor = Color.Black
+                    Font = new Font("Segoe UI", 8, FontStyle.Bold),
+                    ForeColor = Color.Black,
+                    AutoSize = true
                 };
                 panel.Controls.Add(titleLabel);
+                titleLabel.Click += post_Click;
 
                 var dateLabel = new Label
                 {
-                    Text = panelDates[i].ToString("yyyy-MM-dd"),
-                    Location = new Point(panel.Width - 100, 10),
-                    Font = new Font("Segoe UI", 10),
+                    Text = panelInfo.date.ToString("yyyy-MM-dd"),
+                    Location = new Point(panel.Width - 110, 10),
+                    Font = new Font("Segoe UI", 8),
                     TextAlign = ContentAlignment.MiddleRight
                 };
                 panel.Controls.Add(dateLabel);
+                dateLabel.Click += post_Click;
 
-                panel.Click += Panel_Click;
+                panel.Click += post_Click;
 
-                Controls.Add(panel);
+                flowLayoutPosts.Controls.Add(panel);
             }
         }
 
-        private void Panel_Click(object sender, EventArgs e)
+        private void post_Click(object sender, EventArgs e)
         {
             var clickedPanel = (Panel)sender;
-            MessageBox.Show($"You clicked the panel titled: {clickedPanel.Controls[0].Text}");
+            string panelId = clickedPanel.Tag.ToString();
+
+            Dictionary<string, (string title, DateTime date)> panelData = post.GetPanelData();
+
+            if (panelData.ContainsKey(panelId))
+            {
+                //string title = panelData[panelId].title;
+                //DateTime date = panelData[panelId].date;
+
+                this.Hide();
+
+                PostForm post = new PostForm(panelId);
+                post.Closed += (s, args) => this.Close();
+                post.Show();
+            }
+            else
+            {
+                MessageBox.Show("Related post doesn't exist.");
+            }
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
             usernameTxt.Text = Users.username;
-            LoopThroughPanelsAndTextboxes();
+            MakePanels();
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            string keyword = searchTxt.Text;
+            MakePanels(post.SearchPost(keyword));
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            using (Pen pen = new Pen(Color.LightGray, 1))
+            {
+                e.Graphics.DrawLine(pen, 0, panel.Height - 1, panel.Width, panel.Height - 1);
+            }
         }
     }
 }
