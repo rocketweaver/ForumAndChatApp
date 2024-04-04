@@ -39,19 +39,22 @@
             this.searchTxt = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameTxt
             // 
             this.usernameTxt.AutoSize = true;
             this.usernameTxt.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.usernameTxt.Location = new System.Drawing.Point(65, 40);
+            this.usernameTxt.Location = new System.Drawing.Point(58, 32);
             this.usernameTxt.Margin = new System.Windows.Forms.Padding(0);
             this.usernameTxt.Name = "usernameTxt";
-            this.usernameTxt.Size = new System.Drawing.Size(104, 28);
+            this.usernameTxt.Size = new System.Drawing.Size(87, 23);
             this.usernameTxt.TabIndex = 1;
             this.usernameTxt.Text = "Username";
             // 
@@ -63,9 +66,10 @@
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.logoutBtn.Location = new System.Drawing.Point(618, 40);
+            this.logoutBtn.Location = new System.Drawing.Point(549, 32);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(131, 43);
+            this.logoutBtn.Size = new System.Drawing.Size(116, 34);
             this.logoutBtn.TabIndex = 2;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -74,9 +78,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(20, 40);
+            this.pictureBox1.Location = new System.Drawing.Point(18, 32);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox1.Size = new System.Drawing.Size(25, 22);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -89,8 +94,9 @@
             this.panel1.Controls.Add(this.usernameTxt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(786, 111);
+            this.panel1.Size = new System.Drawing.Size(699, 89);
             this.panel1.TabIndex = 3;
             // 
             // flowLayoutPosts
@@ -98,9 +104,10 @@
             this.flowLayoutPosts.AutoScroll = true;
             this.flowLayoutPosts.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.flowLayoutPosts.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 197);
+            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 158);
+            this.flowLayoutPosts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPosts.Name = "flowLayoutPosts";
-            this.flowLayoutPosts.Size = new System.Drawing.Size(786, 375);
+            this.flowLayoutPosts.Size = new System.Drawing.Size(699, 300);
             this.flowLayoutPosts.TabIndex = 4;
             // 
             // panel2
@@ -109,9 +116,10 @@
             this.panel2.Controls.Add(this.searchTxt);
             this.panel2.Controls.Add(this.searchBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 111);
+            this.panel2.Location = new System.Drawing.Point(0, 89);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(786, 86);
+            this.panel2.Size = new System.Drawing.Size(699, 69);
             this.panel2.TabIndex = 5;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -122,10 +130,10 @@
             this.searchTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.searchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.searchTxt.Location = new System.Drawing.Point(20, 11);
-            this.searchTxt.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.searchTxt.Location = new System.Drawing.Point(18, 9);
+            this.searchTxt.Margin = new System.Windows.Forms.Padding(18, 2, 3, 2);
             this.searchTxt.Name = "searchTxt";
-            this.searchTxt.Size = new System.Drawing.Size(577, 30);
+            this.searchTxt.Size = new System.Drawing.Size(513, 26);
             this.searchTxt.TabIndex = 2;
             // 
             // searchBtn
@@ -137,9 +145,10 @@
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.searchBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.searchBtn.Location = new System.Drawing.Point(618, 11);
+            this.searchBtn.Location = new System.Drawing.Point(549, 9);
+            this.searchBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(131, 38);
+            this.searchBtn.Size = new System.Drawing.Size(116, 30);
             this.searchBtn.TabIndex = 3;
             this.searchBtn.Text = "Search";
             this.searchBtn.UseVisualStyleBackColor = false;
@@ -148,18 +157,35 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateProfileToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 80);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // updateProfileToolStripMenuItem
+            // 
+            this.updateProfileToolStripMenuItem.Name = "updateProfileToolStripMenuItem";
+            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.updateProfileToolStripMenuItem.Text = "Update Profile";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 572);
+            this.ClientSize = new System.Drawing.Size(699, 458);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPosts);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
@@ -169,6 +195,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -183,5 +210,7 @@
         private System.Windows.Forms.TextBox searchTxt;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem updateProfileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

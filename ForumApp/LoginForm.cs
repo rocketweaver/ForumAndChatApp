@@ -24,27 +24,30 @@ namespace ForumApp
             string email = emailTxt.Text;
             string password = passwordTxt.Text;
 
-            if(String.IsNullOrEmpty(email) || String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("An input can't be empty.");
-            } else
+            }
+            else
             {
-                if(IsValidEmail(email))
+                if (IsValidEmail(email))
                 {
-                   if(usr.SetUsers(email, password))
-                   {
-                        MessageBox.Show("Welcome, " + Users.username + "!");
+                    if (usr.SetUsers(email, password))
+                    {
+                        MessageBox.Show("Welcome, " + usr.Username + "!");
 
+                        // Tutup kotak pesan sebelum menavigasi ke halaman utama
                         this.Hide();
-
                         Home home = new Home();
                         home.Closed += (s, args) => this.Close();
                         home.Show();
-                    } else 
-                   {
+                    }
+                    else
+                    {
                         MessageBox.Show("Wrong email or password.");
-                   }
-                } else
+                    }
+                }
+                else
                 {
                     MessageBox.Show("Your email format is incorrect.");
                 }
@@ -61,6 +64,16 @@ namespace ForumApp
             {
                 return false;
             }
+        }
+
+        private void txtAcc_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Register register = new Register();
+            register.ShowDialog();
+
+            this.Show();
         }
     }
 }

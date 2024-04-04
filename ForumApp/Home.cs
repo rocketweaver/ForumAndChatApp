@@ -14,6 +14,7 @@ namespace ForumApp
     public partial class Home : Form
     {
         Posts post = new Posts();
+        Users users = new Users();
         public Home()
         {
             InitializeComponent();
@@ -24,13 +25,23 @@ namespace ForumApp
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            Users.username = "";
+            // Menampilkan dialog konfirmasi
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            this.Hide();
+            // Memeriksa apakah pengguna menekan tombol "Yes"
+            if (result == DialogResult.Yes)
+            {
+                // Melakukan logout
+                users.Username = "";
 
-            LoginForm login = new LoginForm();
-            login.Closed += (s, args) => this.Close();
-            login.Show();
+                // Menutup form saat ini
+                this.Hide();
+
+                // Membuka form login
+                LoginForm login = new LoginForm();
+                login.Closed += (s, args) => this.Close();
+                login.Show();
+            }
         }
 
         private void MakePanels(Dictionary<string, (string title, DateTime date)> filteredPosts = null)
@@ -120,7 +131,7 @@ namespace ForumApp
 
         private void Home_Load(object sender, EventArgs e)
         {
-            usernameTxt.Text = Users.username;
+            usernameTxt.Text = users.Username;
             MakePanels();
         }
 
@@ -137,6 +148,35 @@ namespace ForumApp
             {
                 e.Graphics.DrawLine(pen, 0, panel.Height - 1, panel.Width, panel.Height - 1);
             }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            var clickedPanel = (Panel)sender;
+
+            // Membuat dan menambahkan ContextMenuStrip baru
+            ContextMenuStrip contextMenu = new ContextMenuStrip();
+
+            // Menambahkan item dropdown untuk opsi "Update Profile"
+            ToolStripMenuItem updateProfileItem = new ToolStripMenuItem("Update Profile");
+            updateProfileItem.Click += (s, ev) =>
+            {
+                // Tindakan yang akan diambil saat opsi "Update Profile" dipilih
+                MessageBox.Show($"Performing update profile for panel titled: {clickedPanel.Controls[0].Text}");
+            };
+            contextMenu.Items.Add(updateProfileItem);
+
+            // Menambahkan item dropdown untuk opsi "Exit"
+            ToolStripMenuItem exitItem = new ToolStripMenuItem("Exit");
+            exitItem.Click += (s, ev) =>
+            {
+                // Tindakan yang akan diambil saat opsi "Exit" dipilih
+                Application.Exit();
+            };
+            contextMenu.Items.Add(exitItem);
+
+            // Menetapkan ContextMenuStrip ke panel yang diklik
+            clickedPanel.ContextMenuStrip = contextMenu;
         }
     }
 }
