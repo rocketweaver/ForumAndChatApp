@@ -7,30 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ForumApp
 {
-    public partial class Home : Form
+    public partial class Profile : Form
     {
         Posts post = new Posts();
-        public Home()
+
+        public Profile()
         {
             InitializeComponent();
-
-            logoutBtn.FlatStyle = FlatStyle.Flat;
-            logoutBtn.FlatAppearance.BorderSize = 0;
-        }
-
-        private void logoutBtn_Click(object sender, EventArgs e)
-        {
-            Users.username = "";
-
-            this.Hide();
-
-            LoginForm login = new LoginForm();
-            login.Closed += (s, args) => this.Close();
-            login.Show();
         }
 
         private void MakePanels(Dictionary<string, (string title, DateTime date)> filteredPosts = null)
@@ -45,7 +31,8 @@ namespace ForumApp
             if (filteredPosts != null)
             {
                 panelData = filteredPosts;
-            } else
+            }
+            else
             {
                 panelData = post.GetPanelData();
             }
@@ -116,34 +103,11 @@ namespace ForumApp
             }
         }
 
-        private void Home_Load(object sender, EventArgs e)
+        private void Profile_Load(object sender, EventArgs e)
         {
-            usernameTxt.Text = Users.username;
+            usernameLabel.Text = Users.username;
+
             MakePanels();
-        }
-
-        private void searchBtn_Click(object sender, EventArgs e)
-        {
-            string keyword = searchTxt.Text;
-            MakePanels(post.SearchPost(keyword));
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            Panel panel = (Panel)sender;
-            using (Pen pen = new Pen(Color.LightGray, 1))
-            {
-                e.Graphics.DrawLine(pen, 0, panel.Height - 1, panel.Width, panel.Height - 1);
-            }
-        }
-
-        private void usernameTxt_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            Profile profile = new Profile();
-            profile.Closed += (s, args) => this.Close();
-            profile.Show();
         }
     }
 }

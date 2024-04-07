@@ -47,13 +47,15 @@
             // usernameTxt
             // 
             this.usernameTxt.AutoSize = true;
+            this.usernameTxt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.usernameTxt.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.usernameTxt.Location = new System.Drawing.Point(65, 40);
+            this.usernameTxt.Location = new System.Drawing.Point(43, 26);
             this.usernameTxt.Margin = new System.Windows.Forms.Padding(0);
             this.usernameTxt.Name = "usernameTxt";
-            this.usernameTxt.Size = new System.Drawing.Size(104, 28);
+            this.usernameTxt.Size = new System.Drawing.Size(71, 19);
             this.usernameTxt.TabIndex = 1;
             this.usernameTxt.Text = "Username";
+            this.usernameTxt.Click += new System.EventHandler(this.usernameTxt_Click);
             // 
             // logoutBtn
             // 
@@ -63,9 +65,10 @@
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.logoutBtn.Location = new System.Drawing.Point(618, 40);
+            this.logoutBtn.Location = new System.Drawing.Point(412, 26);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(131, 43);
+            this.logoutBtn.Size = new System.Drawing.Size(87, 28);
             this.logoutBtn.TabIndex = 2;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -73,13 +76,16 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(20, 40);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 26);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox1.Size = new System.Drawing.Size(19, 18);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.usernameTxt_Click);
             // 
             // panel1
             // 
@@ -89,8 +95,9 @@
             this.panel1.Controls.Add(this.usernameTxt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(786, 111);
+            this.panel1.Size = new System.Drawing.Size(524, 72);
             this.panel1.TabIndex = 3;
             // 
             // flowLayoutPosts
@@ -98,9 +105,10 @@
             this.flowLayoutPosts.AutoScroll = true;
             this.flowLayoutPosts.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.flowLayoutPosts.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 197);
+            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 128);
+            this.flowLayoutPosts.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPosts.Name = "flowLayoutPosts";
-            this.flowLayoutPosts.Size = new System.Drawing.Size(786, 375);
+            this.flowLayoutPosts.Size = new System.Drawing.Size(524, 244);
             this.flowLayoutPosts.TabIndex = 4;
             // 
             // panel2
@@ -109,9 +117,10 @@
             this.panel2.Controls.Add(this.searchTxt);
             this.panel2.Controls.Add(this.searchBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 111);
+            this.panel2.Location = new System.Drawing.Point(0, 72);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(786, 86);
+            this.panel2.Size = new System.Drawing.Size(524, 56);
             this.panel2.TabIndex = 5;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -122,10 +131,10 @@
             this.searchTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.searchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.searchTxt.Location = new System.Drawing.Point(20, 11);
-            this.searchTxt.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.searchTxt.Location = new System.Drawing.Point(13, 7);
+            this.searchTxt.Margin = new System.Windows.Forms.Padding(13, 2, 2, 2);
             this.searchTxt.Name = "searchTxt";
-            this.searchTxt.Size = new System.Drawing.Size(577, 30);
+            this.searchTxt.Size = new System.Drawing.Size(385, 23);
             this.searchTxt.TabIndex = 2;
             // 
             // searchBtn
@@ -137,9 +146,10 @@
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.searchBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.searchBtn.Location = new System.Drawing.Point(618, 11);
+            this.searchBtn.Location = new System.Drawing.Point(412, 7);
+            this.searchBtn.Margin = new System.Windows.Forms.Padding(2);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(131, 38);
+            this.searchBtn.Size = new System.Drawing.Size(87, 25);
             this.searchBtn.TabIndex = 3;
             this.searchBtn.Text = "Search";
             this.searchBtn.UseVisualStyleBackColor = false;
@@ -153,15 +163,17 @@
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 572);
+            this.ClientSize = new System.Drawing.Size(524, 372);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPosts);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

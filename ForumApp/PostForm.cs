@@ -30,25 +30,10 @@ namespace ForumApp
 
         private void AdjustPostPanelHeight()
         {
-            // Calculate the required height for the desc label based on its content and width
             int requiredHeight = TextRenderer.MeasureText(descLabel.Text, descLabel.Font, 
                 new Size(descLabel.Width, int.MaxValue), TextFormatFlags.WordBreak).Height;
 
-            // Adjust the height of the postPanel to accommodate the desc label's content
             postPanel.Height = requiredHeight;
-
-            // Optional: If you want to adjust the position of other controls below the postPanel, you can do so here
-            // otherControl.Top = postPanel.Bottom + spacing;
-        }
-
-        private void desc_TextChanged(object sender, EventArgs e)
-        {
-            AdjustPostPanelHeight();
-        }
-
-        private void PostForm_Load(object sender, EventArgs e)
-        {
-            LoadPost();
         }
 
         public void LoadPost()
@@ -62,9 +47,14 @@ namespace ForumApp
             }
         }
 
-        private void descLabel_Click(object sender, EventArgs e)
+        private void desc_TextChanged(object sender, EventArgs e)
         {
+            AdjustPostPanelHeight();
+        }
 
+        private void PostForm_Load(object sender, EventArgs e)
+        {
+            LoadPost();
         }
 
         private void panel8_Paint(object sender, PaintEventArgs e)
@@ -76,48 +66,104 @@ namespace ForumApp
             }
         }
 
-        private void commentBtn_Click(object sender, EventArgs e)
+        private string InsertNewlines(string input, int charactersPerLine)
+        {
+            StringBuilder result = new StringBuilder();
+            int count = 0;
+
+            foreach (char c in input)
+            {
+                result.Append(c);
+                count++;
+
+                if (count % charactersPerLine == 0)
+                {
+                    result.Append("\n");
+                }
+            }
+
+            return result.ToString();
+        }
+
+        private ContextMenuStrip loadContextMenu()
+        {
+            ContextMenuStrip customContextMenu = new ContextMenuStrip();
+            ToolStripMenuItem deleteComment = new ToolStripMenuItem("Delete");
+            ToolStripMenuItem reportComment = new ToolStripMenuItem("Report");
+
+            deleteComment.Click += deleteComment_Click;
+            reportComment.Click += reportComment_Click;
+
+            customContextMenu.Items.Add(deleteComment);
+            customContextMenu.Items.Add(reportComment);
+
+            return customContextMenu;
+        }
+
+        private void makeComment()
         {
             Panel commentPanel = new Panel();
-            commentPanel.AutoSize = true;
             commentPanel.BackColor = Color.WhiteSmoke;
             commentPanel.BorderStyle = BorderStyle.FixedSingle;
             commentPanel.Margin = new Padding(13);
+            commentPanel.Width = flowLayoutComment.Width - 30;
+            commentPanel.MaximumSize = new Size(flowLayoutComment.Width - 30, 200);
+
+            commentPanel.ContextMenuStrip = loadContextMenu();
 
             Label authorLabel = new Label();
-            authorLabel.Text = "John Doe"; // You can replace this with the actual author's name
-            authorLabel.Font = new Font("Segoe UI", 9);
+            authorLabel.UseCompatibleTextRendering = true;
+
+            string username = Users.username;
+            string date = DateTime.Now.ToString("dd MMMM yyyy");
+            string hour = DateTime.Now.ToString("hh:MM");
+
+            authorLabel.Text = $"{username} - {date} - {hour}";
+            authorLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             authorLabel.AutoSize = true;
             authorLabel.BackColor = Color.Transparent;
-            authorLabel.Padding = new Padding(10, 8, 8, 0); // Removed bottom padding for authorLabel
+            authorLabel.Padding = new Padding(10, 8, 8, 0);
 
-            // Add authorLabel to commentPanel first
             commentPanel.Controls.Add(authorLabel);
 
             Label commentLabel = new Label();
-            commentLabel.Text = commentTxt.Text;
+            commentLabel.Text = InsertNewlines(commentTxt.Text, 70);
             commentLabel.Font = new Font("Segoe UI", 9);
             commentLabel.AutoSize = true;
             commentLabel.BackColor = Color.Transparent;
-            commentLabel.Padding = new Padding(10, 8, 8, 0); // Removed bottom padding for commentLabel
+            commentLabel.Padding = new Padding(0, 8, 8, 20);
 
-            Label commentDateLabel = new Label();
-            commentDateLabel.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-            commentDateLabel.Font = new Font("Segoe UI", 9);
-            commentDateLabel.AutoSize = true;
-            commentDateLabel.BackColor = Color.Transparent;
-            commentDateLabel.Padding = new Padding(10, 10, 8, 10); // Adjusted top and bottom padding for commentDateLabel
+            commentLabel.Location = new Point(10, authorLabel.Bottom + 5);
 
-            // Set the location of the labels
-            commentLabel.Location = new Point(authorLabel.Left, authorLabel.Bottom + 5); // Adjusted position for commentLabel
-            commentDateLabel.Location = new Point(commentLabel.Left, commentLabel.Bottom + 5); // Adjusted position for commentDateLabel
-
-            // Add the remaining labels to the commentPanel
             commentPanel.Controls.Add(commentLabel);
-            commentPanel.Controls.Add(commentDateLabel);
 
-            // Add the commentPanel to the flowLayoutComment control
+            int totalHeight = commentLabel.Bottom + commentPanel.Padding.Bottom;
+
+            commentPanel.Height = Math.Min(totalHeight, commentPanel.MaximumSize.Height);
+
             flowLayoutComment.Controls.Add(commentPanel);
+        }
+
+        private void commentBtn_Click(object sender, EventArgs e)
+        {
+            makeComment();
+        }
+
+        private void deleteComment_Click(object sender, EventArgs e)
+        {
+            // Handle the click event for Custom Option 1
+        }
+
+        private void reportComment_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
+            Panel panel = (Panel)strip.SourceControl;
+            Label authorLabel = (Label)panel.Controls[0];
+            string username = authorLabel.Text.Split('-')[0].Trim();
+
+            ReportDialog report = new ReportDialog(username);
+            report.ShowDialog();
         }
 
         private void commentTxt_TextChanged(object sender, EventArgs e)
