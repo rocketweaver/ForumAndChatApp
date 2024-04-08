@@ -18,7 +18,7 @@ namespace ForumApp
             koneksi = new Koneksi.Koneksi();
         }
 
-        public bool CreateUser(string email, string username, string fullName, string password)
+        public bool CreateUser(string email, string username, string password)
         {
             try
             {
@@ -30,14 +30,14 @@ namespace ForumApp
 
                 koneksi.bukaKoneksi();
 
-                string query = "INSERT INTO Users (Email, Username, FullName, Password) VALUES (@Email, @Username, @FullName, @Password)";
+                string query = "INSERT INTO Users (Email, Username, Password, Level) VALUES (@Email, @Username, @Password, @Level)";
                 SqlCommand command = new SqlCommand(query, koneksi.con);
                 command.Parameters.AddWithValue("@Email", email);
                 command.Parameters.AddWithValue("@Username", username);
-                command.Parameters.AddWithValue("@FullName", fullName);
                 command.Parameters.AddWithValue("@Password", password);
-                int rowsAffected = command.ExecuteNonQuery();
+                command.Parameters.AddWithValue("@Level", 1); // Set level default ke 1
 
+                int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected > 0;
             }
             catch (Exception ex)

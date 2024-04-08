@@ -31,12 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.submitBtn = new System.Windows.Forms.Button();
             this.txtAcc = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtFullName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -77,18 +75,6 @@
             this.txtEmail.Size = new System.Drawing.Size(360, 26);
             this.txtEmail.TabIndex = 3;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label3.Location = new System.Drawing.Point(120, 209);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 23);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Nama:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // txtUsername
             // 
             this.txtUsername.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -109,7 +95,7 @@
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.submitBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.submitBtn.Location = new System.Drawing.Point(124, 338);
+            this.submitBtn.Location = new System.Drawing.Point(125, 292);
             this.submitBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(360, 43);
@@ -124,7 +110,7 @@
             this.txtAcc.AutoSize = true;
             this.txtAcc.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.txtAcc.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.txtAcc.Location = new System.Drawing.Point(233, 392);
+            this.txtAcc.Location = new System.Drawing.Point(233, 356);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(146, 19);
             this.txtAcc.TabIndex = 8;
@@ -137,31 +123,19 @@
             this.txtPassword.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtPassword.Location = new System.Drawing.Point(124, 287);
+            this.txtPassword.Location = new System.Drawing.Point(124, 246);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(360, 26);
             this.txtPassword.TabIndex = 9;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // txtFullName
-            // 
-            this.txtFullName.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtFullName.Location = new System.Drawing.Point(124, 234);
-            this.txtFullName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(360, 26);
-            this.txtFullName.TabIndex = 10;
-            this.txtFullName.UseSystemPasswordChar = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label4.Location = new System.Drawing.Point(120, 262);
+            this.label4.Location = new System.Drawing.Point(121, 221);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 23);
             this.label4.TabIndex = 11;
@@ -188,12 +162,10 @@
             this.ClientSize = new System.Drawing.Size(620, 450);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtAcc);
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -209,12 +181,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button submitBtn;
         private System.Windows.Forms.Label txtAcc;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
     }

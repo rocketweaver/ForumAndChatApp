@@ -57,6 +57,7 @@
             this.usernameTxt.Size = new System.Drawing.Size(87, 23);
             this.usernameTxt.TabIndex = 1;
             this.usernameTxt.Text = "Username";
+            this.usernameTxt.Click += new System.EventHandler(this.usernameTxt_Click);
             // 
             // logoutBtn
             // 
@@ -161,19 +162,19 @@
             this.updateProfileToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 80);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 52);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // updateProfileToolStripMenuItem
             // 
             this.updateProfileToolStripMenuItem.Name = "updateProfileToolStripMenuItem";
-            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.updateProfileToolStripMenuItem.Text = "Update Profile";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // Home

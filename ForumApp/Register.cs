@@ -41,18 +41,17 @@ namespace ForumApp
 
             string email = txtEmail.Text;
             string username = txtUsername.Text;
-            string fullName = txtFullName.Text;
             string password = txtPassword.Text;
 
-            bool success = register.CreateUser(email, username, fullName, password);
+            bool success = register.CreateUser(email, username, password);
 
             if (success)
             {
                 MessageBox.Show("Registrasi berhasil!");
                 this.Hide();
 
-                LoginForm login = new LoginForm();
-                login.ShowDialog();
+                LoginForm loginForm = new LoginForm();
+                loginForm.ShowDialog();
 
                 this.Show();
             }

@@ -178,5 +178,10 @@ namespace ForumApp
             // Menetapkan ContextMenuStrip ke panel yang diklik
             clickedPanel.ContextMenuStrip = contextMenu;
         }
+
+        private void usernameTxt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

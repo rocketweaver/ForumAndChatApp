@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ForumApp.Koneksi;
+using System.Text.RegularExpressions;
 
 namespace ForumApp
 {
@@ -13,9 +14,11 @@ namespace ForumApp
     {
         private Koneksi.Koneksi koneksi;
 
+        // Properties for user information
+        public int UserId { get; private set; }
+        public string Username { get; set; }
         public string Email { get; private set; }
-        public string Password { get; private set; }
-        public string Username { get;  set; }
+        public int Level { get; private set; }
 
         public Users()
         {
@@ -28,32 +31,40 @@ namespace ForumApp
             {
                 koneksi.bukaKoneksi();
 
-                string query = "SELECT Username FROM Users WHERE Email = @Email AND Password = @Password";
+                string query = "SELECT COUNT(*) FROM Users WHERE Email = @Email AND Password = @Password";
                 SqlCommand command = new SqlCommand(query, koneksi.con);
                 command.Parameters.AddWithValue("@Email", email);
                 command.Parameters.AddWithValue("@Password", password);
 
-                // Execute the query
-                SqlDataReader reader = command.ExecuteReader();
+                int count = (int)command.ExecuteScalar();
 
-                if (reader.Read()) // If there is a matching entry
+                if (count > 0)
                 {
-                    Email = email;
-                    Password = password;
-                    Username = reader["Username"].ToString();
+                    // Jika autentikasi berhasil, ambil informasi pengguna
+                    query = "SELECT id_user, Username, level FROM Users WHERE Email = @Email";
+                    command = new SqlCommand(query, koneksi.con);
+                    command.Parameters.AddWithValue("@Email", email);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        UserId = Convert.ToInt32(reader["id_user"]);
+                        Username = reader["Username"].ToString();
+                        Email = email;
+                        Level = Convert.ToInt32(reader["level"]);
+                    }
 
                     reader.Close();
                     return true;
                 }
                 else
                 {
-                    reader.Close();
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error during login: " + ex.Message);
                 return false;
             }
             finally

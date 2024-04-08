@@ -41,6 +41,28 @@ namespace ForumApp
                         Home home = new Home();
                         home.Closed += (s, args) => this.Close();
                         home.Show();
+
+                        // Check level and open the corresponding form
+                        if (usr.Level == 1)
+                        {
+                            // Open user form
+                            this.Hide();
+                        
+                            home.Closed += (s, args) => this.Close();
+                            home.Show();
+                        }
+                        else if (usr.Level == 2)
+                        {
+                            // Open admin form
+                            this.Hide();
+                            AdminForm adminForm = new AdminForm();
+                            adminForm.Show();
+                        }
+                        else
+                        {
+                            // Handle unexpected level value
+                            MessageBox.Show("Invalid user level.");
+                        }
                     }
                     else
                     {
@@ -74,6 +96,11 @@ namespace ForumApp
             register.ShowDialog();
 
             this.Show();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

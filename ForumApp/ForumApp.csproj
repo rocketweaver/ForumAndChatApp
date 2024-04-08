@@ -46,6 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="banForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="banForm.Designer.cs">
+      <DependentUpon>banForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="banView.cs" />
+    <Compile Include="commentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="commentForm.Designer.cs">
+      <DependentUpon>commentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="commentsView.cs" />
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +79,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="postAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="postAdmin.Designer.cs">
+      <DependentUpon>postAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="PostForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +93,7 @@
     </Compile>
     <Compile Include="Comments.cs" />
     <Compile Include="Posts.cs" />
+    <Compile Include="postsView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.cs">
@@ -76,7 +103,34 @@
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
     <Compile Include="RegisterClass.cs" />
+    <Compile Include="reportAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reportAdmin.Designer.cs">
+      <DependentUpon>reportAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reportsView.cs" />
+    <Compile Include="shareAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shareAdmin.Designer.cs">
+      <DependentUpon>shareAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sharedView.cs" />
+    <Compile Include="userAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userAdmin.Designer.cs">
+      <DependentUpon>userAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs" />
+    <Compile Include="usersView.cs" />
+    <EmbeddedResource Include="AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="banForm.resx">
+      <DependentUpon>banForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +151,9 @@
     </Compile>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userAdmin.resx">
+      <DependentUpon>userAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
