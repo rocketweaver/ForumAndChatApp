@@ -87,7 +87,7 @@ namespace ForumApp
         {
             this.Hide();
 
-            Register register = new Register();
+            RegisterForm register = new RegisterForm();
             register.ShowDialog();
 
             this.Show();

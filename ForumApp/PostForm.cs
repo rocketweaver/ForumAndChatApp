@@ -16,6 +16,7 @@ namespace ForumApp
         string idPost;
         
         Posts post = new Posts();
+        Comments comment = new Comments();
         public PostForm(string id)
         {
             idPost = id;
@@ -57,6 +58,64 @@ namespace ForumApp
                 {
                     likeBtn.Text = "Like (" + postById["like_count"].ToString() + ")";
                 }
+
+                if(postById["user_id"].ToString() == Users.UserId.ToString())
+                {
+                    panel3.Controls.Remove(shareBtn);
+                    panel3.Controls.Remove(reportBtn);
+
+                    var editPostBtn = new Button
+                    {
+                        Name = "edit",
+                        Tag = idPost,
+                        Text = "Edit",
+                        ForeColor = Color.White,
+                        BackColor = Color.DarkOrange,
+                        FlatStyle = FlatStyle.Flat,
+                        FlatAppearance =
+                        {
+                            BorderSize = 0
+                        },
+                        Dock = DockStyle.Fill,
+                        Cursor = Cursors.Hand,
+                        Font = new Font("Segoe UI", 9),
+                    };
+                    editPostBtn.Click += editPostBtn_Click;
+
+                    var deletePostBtn = new Button
+                    {
+                        Name = "delete",
+                        Tag = idPost,
+                        Text = "Delete",
+                        ForeColor = Color.White,
+                        BackColor = Color.Firebrick,
+                        FlatStyle = FlatStyle.Flat,
+                        FlatAppearance =
+                        {
+                            BorderSize = 0
+                        },
+                        Dock = DockStyle.Right,
+                        Cursor = Cursors.Hand,
+                        Width = 169,
+                        Font = new Font("Segoe UI", 9),
+                    };
+                    deletePostBtn.Click += deletePostBtn_Click;
+
+                    panel3.Controls.Add(deletePostBtn);
+                    panel3.Controls.Add(editPostBtn);
+                } else
+                {
+                    bool isShared = post.HasShared(idPost);
+
+                    if (isShared)
+                    {
+                        shareBtn.Text = "Unshare";
+                    }
+                    else
+                    {
+                        shareBtn.Text = "Share";
+                    }
+                }
             }
             else
             {
@@ -69,9 +128,57 @@ namespace ForumApp
             AdjustPostPanelHeight();
         }
 
+        private void LoadComments()
+        {
+            comment.postId = idPost;
+
+            DataSet commentData = comment.ReadById();
+
+            foreach (DataRow row in commentData.Tables["comments"].Rows)
+            {
+                string username = row["username"].ToString();
+                string commentText = row["description"].ToString();
+                string commentDate = ((DateTime)row["comment_date"]).ToString("dd MMMM yyyy - hh:MM");
+
+                Panel commentPanel = new Panel();
+                commentPanel.BackColor = Color.WhiteSmoke;
+                commentPanel.BorderStyle = BorderStyle.FixedSingle;
+                commentPanel.Margin = new Padding(13);
+                commentPanel.MaximumSize = new Size(400, int.MaxValue);
+
+                commentPanel.ContextMenuStrip = loadContextMenu();
+
+                Label authorLabel = new Label();
+                authorLabel.Text = $"{username} - {commentDate}";
+                authorLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                authorLabel.AutoSize = true;
+                authorLabel.BackColor = Color.Transparent;
+                authorLabel.Padding = new Padding(10, 8, 8, 0);
+
+                Label commentLabel = new Label();
+                commentLabel.Text = InsertNewlines(commentText, 70);
+                commentLabel.Font = new Font("Segoe UI", 9);
+                commentLabel.AutoSize = true;
+                commentLabel.BackColor = Color.Transparent;
+                commentLabel.Padding = new Padding(0, 8, 8, 20);
+
+                commentLabel.Location = new Point(10, authorLabel.Bottom + 5);
+
+                commentPanel.Controls.Add(authorLabel);
+                commentPanel.Controls.Add(commentLabel);
+
+                int totalHeight = commentLabel.Bottom + commentPanel.Padding.Bottom;
+
+                commentPanel.Height = Math.Min(totalHeight, commentPanel.MaximumSize.Height);
+
+                flowLayoutComment.Controls.Add(commentPanel);
+            }
+        }
+
         private void PostForm_Load(object sender, EventArgs e)
         {
             LoadPost();
+            LoadComments();
         }
 
         private void panel8_Paint(object sender, PaintEventArgs e)
@@ -117,7 +224,7 @@ namespace ForumApp
             return customContextMenu;
         }
 
-        private void makeComment()
+        private void MakeComment()
         {
             Panel commentPanel = new Panel();
             commentPanel.BackColor = Color.WhiteSmoke;
@@ -161,9 +268,20 @@ namespace ForumApp
             flowLayoutComment.Controls.Add(commentPanel);
         }
 
+
         private void commentBtn_Click(object sender, EventArgs e)
         {
-            makeComment();
+            MakeComment();
+        }
+
+        private void deletePostBtn_Click(object sender, EventArgs e)
+        {
+            // Handle the click event for Custom Option 1
+        }
+
+        private void editPostBtn_Click(object sender, EventArgs e)
+        {
+            // Handle the click event for Custom Option 1
         }
 
         private void deleteComment_Click(object sender, EventArgs e)
@@ -213,6 +331,22 @@ namespace ForumApp
             else
             {
                 post.Unlike(idPost);
+            }
+
+            LoadPost();
+        }
+
+        private void shareBtn_Click(object sender, EventArgs e)
+        {
+            bool isShared = post.HasShared(idPost);
+
+            if (!isShared)
+            {
+                post.Share(idPost);
+            }
+            else
+            {
+                post.Unshare(idPost);
             }
 
             LoadPost();

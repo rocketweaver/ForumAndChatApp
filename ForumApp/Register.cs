@@ -1,67 +1,65 @@
-﻿using ForumApp.Koneksi;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
 
 namespace ForumApp
 {
-    public partial class Register : Form
+    public class Register
     {
-        RegisterClass register = new RegisterClass();
+        private Koneksi.Koneksi koneksi;
+
         public Register()
         {
-            InitializeComponent();
-           
+            koneksi = new Koneksi.Koneksi();
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        public bool CreateUser(string email, string username, string password)
         {
-
-        }
-
-        private void txtAcc_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            LoginForm login = new LoginForm();
-            login.ShowDialog();
-
-            this.Show();
-        }
-
-        private void submitBtn_Click(object sender, EventArgs e)
-        {
-
-            string email = txtEmail.Text;
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-
-            bool success = register.CreateUser(email, username, password);
-
-            if (success)
+            try
             {
-                MessageBox.Show("Registrasi berhasil!");
+                if (!IsValidEmail(email))
+                {
+                    MessageBox.Show("Format email tidak valid.");
+                    return false;
+                }
 
-                this.Hide();
-                LoginForm login = new LoginForm();
-                login.Closed += (s, args) => this.Close();
-                login.Show();
+                koneksi.bukaKoneksi();
+
+                string query = "INSERT INTO Users (Email, Username, Password, Level) VALUES (@Email, @Username, @Password, @Level)";
+                SqlCommand command = new SqlCommand(query, koneksi.con);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Level", 1); // Set level default ke 1
+
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Registrasi gagal. Silakan coba lagi.");
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
             }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            // Pattern regex untuk email
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            // Membuat objek regex
+            Regex regex = new Regex(pattern);
+
+            // Memeriksa apakah email sesuai dengan pola regex
+            return regex.IsMatch(email);
         }
     }
 }
-
-     
-    
-

@@ -39,6 +39,7 @@
             this.searchTxt = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -63,7 +64,7 @@
             this.logoutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutBtn.FlatAppearance.BorderSize = 0;
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.logoutBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.logoutBtn.Location = new System.Drawing.Point(412, 26);
             this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
@@ -97,7 +98,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(524, 72);
+            this.panel1.Size = new System.Drawing.Size(524, 86);
             this.panel1.TabIndex = 3;
             // 
             // flowLayoutPosts
@@ -105,22 +106,23 @@
             this.flowLayoutPosts.AutoScroll = true;
             this.flowLayoutPosts.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.flowLayoutPosts.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 128);
+            this.flowLayoutPosts.Location = new System.Drawing.Point(0, 177);
             this.flowLayoutPosts.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPosts.Name = "flowLayoutPosts";
-            this.flowLayoutPosts.Size = new System.Drawing.Size(524, 244);
+            this.flowLayoutPosts.Size = new System.Drawing.Size(524, 195);
             this.flowLayoutPosts.TabIndex = 4;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.addBtn);
             this.panel2.Controls.Add(this.searchTxt);
             this.panel2.Controls.Add(this.searchBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 72);
+            this.panel2.Location = new System.Drawing.Point(0, 86);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(524, 56);
+            this.panel2.Size = new System.Drawing.Size(524, 91);
             this.panel2.TabIndex = 5;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -130,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.searchTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.searchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.searchTxt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTxt.Location = new System.Drawing.Point(13, 7);
             this.searchTxt.Margin = new System.Windows.Forms.Padding(13, 2, 2, 2);
             this.searchTxt.Name = "searchTxt";
@@ -142,14 +144,15 @@
             this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBtn.BackColor = System.Drawing.Color.SteelBlue;
+            this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.searchBtn.FlatAppearance.BorderSize = 0;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.searchBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.searchBtn.Location = new System.Drawing.Point(412, 7);
             this.searchBtn.Margin = new System.Windows.Forms.Padding(2);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(87, 25);
+            this.searchBtn.Size = new System.Drawing.Size(87, 23);
             this.searchBtn.TabIndex = 3;
             this.searchBtn.Text = "Search";
             this.searchBtn.UseVisualStyleBackColor = false;
@@ -160,6 +163,24 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // addBtn
+            // 
+            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addBtn.BackColor = System.Drawing.Color.YellowGreen;
+            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addBtn.FlatAppearance.BorderSize = 0;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.ForeColor = System.Drawing.Color.White;
+            this.addBtn.Location = new System.Drawing.Point(13, 44);
+            this.addBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(87, 27);
+            this.addBtn.TabIndex = 4;
+            this.addBtn.Text = "Post";
+            this.addBtn.UseVisualStyleBackColor = false;
             // 
             // Home
             // 
@@ -195,5 +216,6 @@
         private System.Windows.Forms.TextBox searchTxt;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button addBtn;
     }
 }

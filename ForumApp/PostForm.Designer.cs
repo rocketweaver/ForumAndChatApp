@@ -67,7 +67,7 @@
             this.panel1.Controls.Add(this.postPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(20, 52);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(493, 446);
             this.panel1.TabIndex = 0;
@@ -80,7 +80,7 @@
             this.panel2.Controls.Add(this.flowLayoutComment);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 173);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(491, 271);
             this.panel2.TabIndex = 4;
@@ -101,7 +101,7 @@
             this.panel5.Controls.Add(this.commentBtn);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(13, 10, 13, 10);
             this.panel5.Size = new System.Drawing.Size(491, 89);
@@ -113,7 +113,7 @@
             this.panel8.Controls.Add(this.commentTxt);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(13, 10);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(296, 69);
             this.panel8.TabIndex = 5;
@@ -125,7 +125,7 @@
             this.commentTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.commentTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.commentTxt.Location = new System.Drawing.Point(0, 0);
-            this.commentTxt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.commentTxt.Margin = new System.Windows.Forms.Padding(2);
             this.commentTxt.Name = "commentTxt";
             this.commentTxt.Size = new System.Drawing.Size(294, 67);
             this.commentTxt.TabIndex = 1;
@@ -140,7 +140,7 @@
             this.commentBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.commentBtn.ForeColor = System.Drawing.Color.White;
             this.commentBtn.Location = new System.Drawing.Point(322, 10);
-            this.commentBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.commentBtn.Margin = new System.Windows.Forms.Padding(2);
             this.commentBtn.Name = "commentBtn";
             this.commentBtn.Size = new System.Drawing.Size(156, 29);
             this.commentBtn.TabIndex = 4;
@@ -170,12 +170,13 @@
             this.shareBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.shareBtn.ForeColor = System.Drawing.Color.White;
             this.shareBtn.Location = new System.Drawing.Point(169, 0);
-            this.shareBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.shareBtn.Margin = new System.Windows.Forms.Padding(2);
             this.shareBtn.Name = "shareBtn";
             this.shareBtn.Size = new System.Drawing.Size(153, 42);
             this.shareBtn.TabIndex = 8;
             this.shareBtn.Text = "Share";
             this.shareBtn.UseVisualStyleBackColor = false;
+            this.shareBtn.Click += new System.EventHandler(this.shareBtn_Click);
             // 
             // reportBtn
             // 
@@ -188,7 +189,7 @@
             this.reportBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.reportBtn.ForeColor = System.Drawing.Color.White;
             this.reportBtn.Location = new System.Drawing.Point(322, 0);
-            this.reportBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reportBtn.Margin = new System.Windows.Forms.Padding(2);
             this.reportBtn.Name = "reportBtn";
             this.reportBtn.Size = new System.Drawing.Size(169, 42);
             this.reportBtn.TabIndex = 7;
@@ -207,7 +208,7 @@
             this.likeBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.likeBtn.ForeColor = System.Drawing.Color.White;
             this.likeBtn.Location = new System.Drawing.Point(0, 0);
-            this.likeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.likeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.likeBtn.Name = "likeBtn";
             this.likeBtn.Size = new System.Drawing.Size(169, 42);
             this.likeBtn.TabIndex = 6;
@@ -235,7 +236,7 @@
             this.postPanel.Controls.Add(this.panel6);
             this.postPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.postPanel.Location = new System.Drawing.Point(0, 0);
-            this.postPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.postPanel.Margin = new System.Windows.Forms.Padding(2);
             this.postPanel.Name = "postPanel";
             this.postPanel.Padding = new System.Windows.Forms.Padding(17, 20, 17, 26);
             this.postPanel.Size = new System.Drawing.Size(491, 173);
@@ -259,7 +260,7 @@
             this.panel7.Controls.Add(this.authorLabel);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(17, 54);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(440, 27);
             this.panel7.TabIndex = 7;
@@ -284,7 +285,7 @@
             this.panel6.Controls.Add(this.dateLabel);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(17, 20);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.panel6.Size = new System.Drawing.Size(440, 34);
@@ -326,7 +327,7 @@
             this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backBtn.ForeColor = System.Drawing.Color.White;
             this.backBtn.Location = new System.Drawing.Point(20, 17);
-            this.backBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(2);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(78, 25);
             this.backBtn.TabIndex = 2;
@@ -342,7 +343,7 @@
             this.ClientSize = new System.Drawing.Size(533, 518);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PostForm";
             this.Padding = new System.Windows.Forms.Padding(20, 52, 20, 20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

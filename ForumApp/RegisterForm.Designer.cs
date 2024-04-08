@@ -1,6 +1,6 @@
 ﻿namespace ForumApp
 {
-    partial class Register
+    partial class RegisterForm
     {
         /// <summary>
         /// Required designer variable.

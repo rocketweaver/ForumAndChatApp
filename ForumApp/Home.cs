@@ -33,7 +33,7 @@ namespace ForumApp
             login.Show();
         }
 
-        private void MakePanels(DataSet filteredPosts = null)
+        private void LoadPosts(DataSet filteredPosts = null)
         {
             flowLayoutPosts.Controls.Clear();
 
@@ -128,13 +128,13 @@ namespace ForumApp
                 MessageBox.Show("Username is empty.");
             }
 
-            MakePanels();
+            LoadPosts();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
             string keyword = searchTxt.Text;
-            MakePanels(post.Search(keyword));
+            LoadPosts(post.Search(keyword));
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
