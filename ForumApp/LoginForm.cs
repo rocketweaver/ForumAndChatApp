@@ -13,7 +13,6 @@ namespace ForumApp
 {
     public partial class LoginForm : Form
     {
-        Users usr = new Users();
         public LoginForm()
         {
             InitializeComponent();
@@ -24,27 +23,48 @@ namespace ForumApp
             string email = emailTxt.Text;
             string password = passwordTxt.Text;
 
-            if(String.IsNullOrEmpty(email) || String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("An input can't be empty.");
-            } else
+            }
+            else
             {
-                if(IsValidEmail(email))
+                if (IsValidEmail(email))
                 {
-                   if(usr.SetUsers(email, password))
-                   {
-                        MessageBox.Show("Welcome, " + Users.username + "!");
+                    if (Users.SetUsers(email, password))
+                    {
+                        MessageBox.Show("Welcome, " + Users.Username + "!");
 
                         this.Hide();
-
                         Home home = new Home();
                         home.Closed += (s, args) => this.Close();
                         home.Show();
-                    } else 
-                   {
+
+                        if (Users.Level == 1)
+                        {
+                            this.Hide();
+                        
+                            home.Closed += (s, args) => this.Close();
+                            home.Show();
+                        }
+                        else if (Users.Level == 2)
+                        {
+                            // Open admin form
+                            /*this.Hide();
+                            AdminForm adminForm = new AdminForm();
+                            adminForm.Show();*/
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid user level.");
+                        }
+                    }
+                    else
+                    {
                         MessageBox.Show("Wrong email or password.");
-                   }
-                } else
+                    }
+                }
+                else
                 {
                     MessageBox.Show("Your email format is incorrect.");
                 }
@@ -61,6 +81,16 @@ namespace ForumApp
             {
                 return false;
             }
+        }
+
+        private void txtAcc_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Register register = new Register();
+            register.ShowDialog();
+
+            this.Show();
         }
     }
 }

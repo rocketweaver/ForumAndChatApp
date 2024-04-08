@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ForumApp.Koneksi;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,57 +12,199 @@ namespace ForumApp
 {
     class Posts
     {
-        public string[] panelId = { "P001", "P002", "P003", "P004", "P005", "P006", "P007", "P008", "P009" };
-        public string[] panelTitles = { "How Do I clear this?", "Fix my code", "Panel 3", "Panel 4", 
-                                        "Panel 5", "Panel 6", "Panel 7", "Panel 8", "Panel 59", };
-        public DateTime[] panelDates = { DateTime.Now, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2),
-                                        DateTime.Now.AddDays(3), DateTime.Now.AddDays(4),
-                                        DateTime.Now.AddDays(5), DateTime.Now.AddDays(3), DateTime.Now.AddDays(4),
-                                        DateTime.Now.AddDays(5) };
+        Koneksi.Koneksi koneksi = new Koneksi.Koneksi();
 
-        Dictionary<string, (string title, DateTime date)> panelData = new Dictionary<string, (string, DateTime)>();
+        public int like;
+        public int id;
 
-        public Posts()
+        public DataSet Read()
         {
-            panelData = new Dictionary<string, (string, DateTime)>();
-
-            for (int i = 0; i < panelId.Length; i++)
+            DataSet ds = new DataSet();
+            try
             {
-                panelData[panelId[i]] = (panelTitles[i], panelDates[i]);
+                string query = "SELECT * FROM posts";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                da.Fill(ds, "posts");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
+
+        public DataRow ReadById(string id)
+        {
+            DataRow row = null;
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                if (string.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("No post related.");
+                    return row;
+                }
+
+                string query = @"SELECT posts.*, users.username 
+                                FROM posts JOIN users 
+                                ON posts.user_id = users.id_user 
+                                WHERE posts.id_post = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = com.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                if (dt.Rows.Count > 0)
+                {
+                    row = dt.Rows[0];
+                }
+
+                return row;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
             }
         }
 
-        public Dictionary<string, (string title, DateTime date)> GetPanelData()
+        public DataSet ReadByUserId(string id)
         {
-            return panelData;
-        }
-
-        public Dictionary<string, (string title, DateTime date)> GetPostById(string id)
-        {
-            if (string.IsNullOrEmpty(id) || !panelData.Any(p => p.Key.ToUpper().Contains(id.ToUpper())))
+            DataSet ds = new DataSet();
+            if (string.IsNullOrEmpty(id))
             {
                 MessageBox.Show("No post related.");
-                return panelData;
+                return ds;
             }
 
-            id = id.ToUpper();
-            var filteredData = panelData.Where(p => p.Key.ToUpper().Contains(id)).ToDictionary(p => p.Key, p => p.Value);
-
-            return filteredData;
+            try
+            {
+                string query = "SELECT * FROM posts WHERE user_id = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@id", id);
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                da.Fill(ds, "posts");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
         }
 
-        public Dictionary<string, (string title, DateTime date)> SearchPost(string keyword)
+        public DataSet Search(string keyword)
         {
-            if (string.IsNullOrEmpty(keyword) || !panelData.Any(p => p.Value.title.ToLower().Contains(keyword.ToLower())))
+            DataSet ds = new DataSet();
+            try
             {
-                MessageBox.Show("No post with specific keyword.");
-                return panelData; 
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    MessageBox.Show("Please enter a keyword.");
+                    return ds;
+                }
+
+                string query = "SELECT * FROM posts WHERE title LIKE @keyword";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@keyword", "%" + keyword + "%"); // Add wildcard % to search for partial matches
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                da.Fill(ds, "posts");
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
 
-            keyword = keyword.ToLower();
-            var filteredData = panelData.Where(p => p.Value.title.ToLower().Contains(keyword)).ToDictionary(p => p.Key, p => p.Value);
+        public bool HasLiked(string postId)
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
 
-            return filteredData;
+                string query = "SELECT COUNT(*) FROM liked_posts WHERE " +
+                                "post_id = @postId AND user_id = @userId";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@postId", postId);
+                com.Parameters.AddWithValue("@userId", Users.UserId);
+
+                int likeCount = (int)com.ExecuteScalar();
+
+                return likeCount > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public void Like(string postId)
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string likeQuery = "INSERT INTO liked_posts (post_id, " +
+                                    "user_id) VALUES (@postId, @userId)";
+                SqlCommand likeCommand = new SqlCommand(likeQuery, koneksi.con);
+                likeCommand.Parameters.AddWithValue("@postId", postId);
+                likeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                likeCommand.ExecuteNonQuery();
+
+                string updateQuery = "UPDATE posts SET like_count = like_count " +
+                                    "+ 1 WHERE id_post = @postId";
+                SqlCommand updateCommand = new SqlCommand(updateQuery, koneksi.con);
+                updateCommand.Parameters.AddWithValue("@postId", postId);
+                updateCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public void Unlike(string postId)
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string unlikeQuery = "DELETE FROM liked_posts WHERE post_id = @postId AND user_id = @userId";
+                SqlCommand unlikeCommand = new SqlCommand(unlikeQuery, koneksi.con);
+                unlikeCommand.Parameters.AddWithValue("@postId", postId);
+                unlikeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                unlikeCommand.ExecuteNonQuery();
+
+                string updateQuery = "UPDATE posts SET like_count = like_count - 1 WHERE id_post = @postId";
+                SqlCommand updateCommand = new SqlCommand(updateQuery, koneksi.con);
+                updateCommand.Parameters.AddWithValue("@postId", postId);
+                updateCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
         }
     }
 }

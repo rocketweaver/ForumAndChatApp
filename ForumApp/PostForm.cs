@@ -38,12 +38,29 @@ namespace ForumApp
 
         public void LoadPost()
         {
-            Dictionary<string, (string title, DateTime date)> postById = post.GetPostById(idPost);
+            DataRow postById = post.ReadById(idPost);
 
-            foreach (var kvp in postById)
+            if (postById != null)
             {
-                titleLabel.Text = kvp.Value.title;
-                dateLabel.Text = kvp.Value.date.ToString("yyyy-MM-dd");
+                titleLabel.Text = postById["title"].ToString();
+                dateLabel.Text = ((DateTime)postById["post_date"]).ToString("yyyy-MM-dd");
+                authorLabel.Text = "by " + postById["username"].ToString();
+                descLabel.Text = postById["description"].ToString();
+
+                bool isLiked = post.HasLiked(idPost);
+
+                if (isLiked)
+                {
+                    likeBtn.Text = "Unlike (" + postById["like_count"].ToString() + ")";
+                }
+                else
+                {
+                    likeBtn.Text = "Like (" + postById["like_count"].ToString() + ")";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Post not found.");
             }
         }
 
@@ -114,7 +131,7 @@ namespace ForumApp
             Label authorLabel = new Label();
             authorLabel.UseCompatibleTextRendering = true;
 
-            string username = Users.username;
+            string username = Users.Username;
             string date = DateTime.Now.ToString("dd MMMM yyyy");
             string hour = DateTime.Now.ToString("hh:MM");
 
@@ -174,6 +191,31 @@ namespace ForumApp
                 commentTxt.Text = commentTxt.Text.Substring(0, 280);
                 commentTxt.SelectionStart = commentTxt.Text.Length;
             }
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Home home = new Home();
+            home.Closed += (s, args) => this.Close();
+            home.Show();
+        }
+
+        private void likeBtn_Click(object sender, EventArgs e)
+        {
+            bool isLiked = post.HasLiked(idPost);
+
+            if (!isLiked)
+            {
+                post.Like(idPost);
+            }
+            else
+            {
+                post.Unlike(idPost);
+            }
+
+            LoadPost();
         }
     }
 }
