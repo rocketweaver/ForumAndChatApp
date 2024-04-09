@@ -1,5 +1,4 @@
-﻿using ForumApp.Koneksi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +13,7 @@ namespace ForumApp
 {
     public partial class RegisterForm : Form
     {
-        Register register = new Register();
+        RegisterModel register = new RegisterModel();
         public RegisterForm()
         {
             InitializeComponent();

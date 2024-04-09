@@ -11,8 +11,7 @@ using System.Windows.Forms;
 namespace ForumApp
 {
     public partial class Profile : Form
-    {
-        Posts post = new Posts();   
+    {  
 
         public Profile()
         {
@@ -27,8 +26,9 @@ namespace ForumApp
             {
                 DataSet panelData;
 
-                Posts posts = new Posts();
-                panelData = posts.ReadByUserId(Users.UserId.ToString());
+                PostsModel posts = new PostsModel();
+                posts.userId = UsersModel.UserId.ToString();
+                panelData = posts.ReadByUserId();
 
                 foreach (DataRow row in panelData.Tables["posts"].Rows)
                 {
@@ -84,8 +84,9 @@ namespace ForumApp
             {
                 DataSet panelData;
 
-                Posts posts = new Posts();
-                panelData = posts.ReadByShare(Users.UserId.ToString());
+                PostsModel posts = new PostsModel();
+                posts.userId = UsersModel.UserId.ToString();
+                panelData = posts.ReadByShare();
 
                 foreach (DataRow row in panelData.Tables["posts"].Rows)
                 {
@@ -138,13 +139,14 @@ namespace ForumApp
             var clickedPanel = (Panel)sender;
             string panelId = clickedPanel.Tag.ToString();
 
-            Posts posts = new Posts();
-            DataRow postById = posts.ReadById(panelId);
+            PostsModel posts = new PostsModel();
+            posts.id = panelId;
+            DataRow postById = posts.ReadById();
 
             if (postById != null)
             {
                 this.Hide();
-                Post postForm = new Post(panelId);
+                Posts postForm = new Posts(panelId);
                 postForm.Closed += (s, args) => this.Close();
                 postForm.Show();
             }
@@ -156,7 +158,7 @@ namespace ForumApp
 
         private void Profile_Load(object sender, EventArgs e)
         {
-            usernameLabel.Text = Users.Username;
+            usernameLabel.Text = UsersModel.Username;
 
             LoadUserPosts();
             LoadUserShares();
@@ -172,7 +174,7 @@ namespace ForumApp
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            Users.SetUsers("", "");
+            UsersModel.SetUsers("", "");
 
             this.Hide();
 

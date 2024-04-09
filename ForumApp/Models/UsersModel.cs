@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace ForumApp
 {
-    class Users
+    class UsersModel
     {
         private static Koneksi koneksi = new Koneksi();
 

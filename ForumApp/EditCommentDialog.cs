@@ -13,7 +13,6 @@ namespace ForumApp
     public partial class EditCommentDialog : Form
     {
         string idComment;
-        Comments comment = new Comments();  
         public EditCommentDialog(string id)
         {
             idComment = id;
@@ -23,6 +22,8 @@ namespace ForumApp
 
         private void EditCommentDialog_Load(object sender, EventArgs e)
         {
+            CommentsModel comment = new CommentsModel();
+
             comment.id = idComment;
             DataRow row = comment.ReadById();
 
@@ -41,13 +42,21 @@ namespace ForumApp
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            comment.id = idComment;
-            comment.description = commentTxt.Text;  
-            comment.Update();
+            CommentsModel comment = new CommentsModel();  
 
-            CommentEdited?.Invoke(this, EventArgs.Empty);
+            if(String.IsNullOrEmpty(commentTxt.Text)) {
+                MessageBox.Show("The comment can't be empty.");
+            } 
+            else
+            {
+                comment.id = idComment;
+                comment.description = commentTxt.Text;
+                comment.Update();
 
-            this.Close();
+                CommentEdited?.Invoke(this, EventArgs.Empty);
+
+                this.Close();
+            }
         }
     }
 }

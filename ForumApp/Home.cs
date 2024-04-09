@@ -13,7 +13,6 @@ namespace ForumApp
 {
     public partial class Home : Form
     {
-        Posts post = new Posts();
         public Home()
         {
             InitializeComponent();
@@ -24,7 +23,7 @@ namespace ForumApp
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            Users.SetUsers("","");
+            UsersModel.SetUsers("","");
 
             this.Hide();
 
@@ -47,7 +46,7 @@ namespace ForumApp
                 }
                 else
                 {
-                    Posts posts = new Posts();
+                    PostsModel posts = new PostsModel();
                     panelData = posts.Read();
                 }
 
@@ -102,13 +101,14 @@ namespace ForumApp
             var clickedPanel = (Panel)sender;
             string panelId = clickedPanel.Tag.ToString();
 
-            Posts posts = new Posts();
-            DataRow postById = posts.ReadById(panelId);
+            PostsModel posts = new PostsModel();
+            posts.id = panelId;
+            DataRow postById = posts.ReadById();
 
             if (postById != null)
             {
                 this.Hide();
-                Post postForm = new Post(panelId);
+                Posts postForm = new Posts(panelId);
                 postForm.Closed += (s, args) => this.Close();
                 postForm.Show();
             }
@@ -121,7 +121,7 @@ namespace ForumApp
 
         private void Home_Load(object sender, EventArgs e)
         {
-            usernameTxt.Text = Users.Username;
+            usernameTxt.Text = UsersModel.Username;
 
             if (string.IsNullOrEmpty(usernameTxt.Text))
             {
@@ -133,6 +133,8 @@ namespace ForumApp
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
+            PostsModel post = new PostsModel();
+
             string keyword = searchTxt.Text;
             LoadPosts(post.Search(keyword));
         }
@@ -153,6 +155,14 @@ namespace ForumApp
             Profile profile = new Profile();
             profile.Closed += (s, args) => this.Close();
             profile.Show();
+        }
+
+        private void postBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            PostForm postForm = new PostForm();
+            postForm.Closed += (s, args) => this.Close();
+            postForm.Show();
         }
     }
 }

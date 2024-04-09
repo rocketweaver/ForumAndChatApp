@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ForumApp
 {
-    class Comments
+    class CommentsModel
     {
 
         public string id;

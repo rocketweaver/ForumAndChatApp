@@ -9,12 +9,16 @@ using System.Windows.Forms;
 
 namespace ForumApp
 {
-    class Posts
+    class PostsModel
     {
         Koneksi koneksi = new Koneksi();
 
-        public int like;
-        public int id;
+        public string like;
+        public string id;
+        public string userId;
+        public string title;
+        public string desc;
+        public string postId;
 
         public DataSet Read()
         {
@@ -33,7 +37,7 @@ namespace ForumApp
             return ds;
         }
 
-        public DataRow ReadById(string id)
+        public DataRow ReadById()
         {
             DataRow row = null;
             try
@@ -75,10 +79,10 @@ namespace ForumApp
             }
         }
 
-        public DataSet ReadByUserId(string id)
+        public DataSet ReadByUserId()
         {
             DataSet ds = new DataSet();
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(userId))
             {
                 MessageBox.Show("No post related.");
                 return ds;
@@ -88,7 +92,7 @@ namespace ForumApp
             {
                 string query = "SELECT * FROM posts WHERE user_id = @id";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
-                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@id", userId);
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds, "posts");
             }
@@ -99,10 +103,10 @@ namespace ForumApp
             return ds;
         }
 
-        public DataSet ReadByShare(string id)
+        public DataSet ReadByShare()
         {
             DataSet ds = new DataSet();
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(userId))
             {
                 MessageBox.Show("User ID is required.");
                 return ds;
@@ -116,7 +120,7 @@ namespace ForumApp
                          WHERE sp.user_id = @userId";
 
                 SqlCommand com = new SqlCommand(query, koneksi.con);
-                com.Parameters.AddWithValue("@userId", id);
+                com.Parameters.AddWithValue("@userId", userId);
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds, "posts");
             }
@@ -152,7 +156,7 @@ namespace ForumApp
             return ds;
         }
 
-        public bool HasLiked(string postId)
+        public bool HasLiked()
         {
             try
             {
@@ -162,7 +166,7 @@ namespace ForumApp
                                 "post_id = @postId AND user_id = @userId";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
                 com.Parameters.AddWithValue("@postId", postId);
-                com.Parameters.AddWithValue("@userId", Users.UserId);
+                com.Parameters.AddWithValue("@userId", UsersModel.UserId);
 
                 int likeCount = (int)com.ExecuteScalar();
 
@@ -179,7 +183,7 @@ namespace ForumApp
             }
         }
 
-        public void Like(string postId)
+        public void Like()
         {
             try
             {
@@ -189,7 +193,7 @@ namespace ForumApp
                                     "user_id) VALUES (@postId, @userId)";
                 SqlCommand likeCommand = new SqlCommand(likeQuery, koneksi.con);
                 likeCommand.Parameters.AddWithValue("@postId", postId);
-                likeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                likeCommand.Parameters.AddWithValue("@userId", UsersModel.UserId);
                 likeCommand.ExecuteNonQuery();
 
                 string updateQuery = "UPDATE posts SET like_count = like_count " +
@@ -208,7 +212,7 @@ namespace ForumApp
             }
         }
 
-        public void Unlike(string postId)
+        public void Unlike()
         {
             try
             {
@@ -217,7 +221,7 @@ namespace ForumApp
                 string unlikeQuery = "DELETE FROM liked_posts WHERE post_id = @postId AND user_id = @userId";
                 SqlCommand unlikeCommand = new SqlCommand(unlikeQuery, koneksi.con);
                 unlikeCommand.Parameters.AddWithValue("@postId", postId);
-                unlikeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                unlikeCommand.Parameters.AddWithValue("@userId", UsersModel.UserId);
                 unlikeCommand.ExecuteNonQuery();
 
                 string updateQuery = "UPDATE posts SET like_count = like_count - 1 WHERE id_post = @postId";
@@ -235,7 +239,7 @@ namespace ForumApp
             }
         }
 
-        public bool HasShared(string postId)
+        public bool HasShared()
         {
             try
             {
@@ -245,7 +249,7 @@ namespace ForumApp
                                 "post_id = @postId AND user_id = @userId";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
                 com.Parameters.AddWithValue("@postId", postId);
-                com.Parameters.AddWithValue("@userId", Users.UserId);
+                com.Parameters.AddWithValue("@userId", UsersModel.UserId);
 
                 int shareCount = (int)com.ExecuteScalar();
 
@@ -262,7 +266,7 @@ namespace ForumApp
             }
         }
 
-        public void Share(string postId)
+        public void Share()
         {
             try
             {
@@ -272,7 +276,7 @@ namespace ForumApp
                                     "user_id) VALUES (@postId, @userId)";
                 SqlCommand likeCommand = new SqlCommand(likeQuery, koneksi.con);
                 likeCommand.Parameters.AddWithValue("@postId", postId);
-                likeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                likeCommand.Parameters.AddWithValue("@userId", UsersModel.UserId);
                 likeCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -285,7 +289,7 @@ namespace ForumApp
             }
         }
 
-        public void Unshare(string postId)
+        public void Unshare()
         {
             try
             {
@@ -294,8 +298,77 @@ namespace ForumApp
                 string unlikeQuery = "DELETE FROM shared_posts WHERE post_id = @postId AND user_id = @userId";
                 SqlCommand unlikeCommand = new SqlCommand(unlikeQuery, koneksi.con);
                 unlikeCommand.Parameters.AddWithValue("@postId", postId);
-                unlikeCommand.Parameters.AddWithValue("@userId", Users.UserId);
+                unlikeCommand.Parameters.AddWithValue("@userId", UsersModel.UserId);
                 unlikeCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public void Create()
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string query = "INSERT INTO posts (title, description, post_date, user_id) " +
+                                "VALUES (@title, @desc, @post_date, @user_id)";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@title", title);
+                com.Parameters.AddWithValue("@desc", desc);
+                com.Parameters.AddWithValue("@post_date", DateTime.Now.ToString("yyyy-MM-dd"));
+                com.Parameters.AddWithValue("@user_id", userId);
+                int i = com.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public void Update()
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string query = "UPDATE posts set title = @title, description = @desc " +
+                                "WHERE id_post = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@title", title);
+                com.Parameters.AddWithValue("@desc", desc);
+                com.Parameters.AddWithValue("@id", id);
+                int i = com.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+        public void Delete()
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string query = "DELETE FROM posts WHERE id_post = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@id", id);
+                int i = com.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

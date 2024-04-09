@@ -65,14 +65,20 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Post.cs">
+    <Compile Include="PostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Post.Designer.cs">
-      <DependentUpon>Post.cs</DependentUpon>
+    <Compile Include="PostForm.Designer.cs">
+      <DependentUpon>PostForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comments.cs" />
-    <Compile Include="Models\Posts.cs" />
+    <Compile Include="Posts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Posts.Designer.cs">
+      <DependentUpon>Posts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommentsModel.cs" />
+    <Compile Include="Models\PostsModel.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,14 +93,14 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="ReportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReportDialog.Designer.cs">
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\UsersModel.cs" />
     <EmbeddedResource Include="EditCommentDialog.resx">
       <DependentUpon>EditCommentDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,8 +110,11 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Post.resx">
-      <DependentUpon>Post.cs</DependentUpon>
+    <EmbeddedResource Include="PostForm.resx">
+      <DependentUpon>PostForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Posts.resx">
+      <DependentUpon>Posts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>

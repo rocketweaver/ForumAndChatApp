@@ -31,23 +31,23 @@ namespace ForumApp
             {
                 if (IsValidEmail(email))
                 {
-                    if (Users.SetUsers(email, password))
+                    if (UsersModel.SetUsers(email, password))
                     {
-                        MessageBox.Show("Welcome, " + Users.Username + "!");
+                        MessageBox.Show("Welcome, " + UsersModel.Username + "!");
 
                         this.Hide();
                         Home home = new Home();
                         home.Closed += (s, args) => this.Close();
                         home.Show();
 
-                        if (Users.Level == 1)
+                        if (UsersModel.Level == 1)
                         {
                             this.Hide();
                         
                             home.Closed += (s, args) => this.Close();
                             home.Show();
                         }
-                        else if (Users.Level == 2)
+                        else if (UsersModel.Level == 2)
                         {
                             // Open admin form
                             /*this.Hide();

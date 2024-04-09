@@ -9,11 +9,11 @@ using System.Text.RegularExpressions;
 
 namespace ForumApp
 {
-    public class Register
+    public class RegisterModel
     {
         private Koneksi koneksi;
 
-        public Register()
+        public RegisterModel()
         {
             koneksi = new Koneksi();
         }

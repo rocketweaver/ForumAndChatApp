@@ -127,6 +127,7 @@
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.reportTxt);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Report";
