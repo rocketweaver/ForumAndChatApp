@@ -65,14 +65,14 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PostForm.cs">
+    <Compile Include="Post.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PostForm.Designer.cs">
-      <DependentUpon>PostForm.cs</DependentUpon>
+    <Compile Include="Post.Designer.cs">
+      <DependentUpon>Post.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comments.cs" />
-    <Compile Include="Posts.cs" />
+    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\Posts.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,14 +87,14 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Register.cs" />
+    <Compile Include="Models\Register.cs" />
     <Compile Include="ReportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReportDialog.Designer.cs">
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs" />
+    <Compile Include="Models\Users.cs" />
     <EmbeddedResource Include="EditCommentDialog.resx">
       <DependentUpon>EditCommentDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,8 +104,8 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PostForm.resx">
-      <DependentUpon>PostForm.cs</DependentUpon>
+    <EmbeddedResource Include="Post.resx">
+      <DependentUpon>Post.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>

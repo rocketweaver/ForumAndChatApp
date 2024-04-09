@@ -18,7 +18,7 @@ namespace ForumApp
         public string description;
         public string commentDate;
 
-        Koneksi.Koneksi koneksi = new Koneksi.Koneksi();
+        Koneksi koneksi = new Koneksi();
 
         public DataSet ReadByPostId()
         {

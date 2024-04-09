@@ -144,7 +144,7 @@ namespace ForumApp
             if (postById != null)
             {
                 this.Hide();
-                PostForm postForm = new PostForm(panelId);
+                Post postForm = new Post(panelId);
                 postForm.Closed += (s, args) => this.Close();
                 postForm.Show();
             }

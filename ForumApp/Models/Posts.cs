@@ -1,5 +1,4 @@
-﻿using ForumApp.Koneksi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +11,7 @@ namespace ForumApp
 {
     class Posts
     {
-        Koneksi.Koneksi koneksi = new Koneksi.Koneksi();
+        Koneksi koneksi = new Koneksi();
 
         public int like;
         public int id;

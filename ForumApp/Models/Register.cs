@@ -11,11 +11,11 @@ namespace ForumApp
 {
     public class Register
     {
-        private Koneksi.Koneksi koneksi;
+        private Koneksi koneksi;
 
         public Register()
         {
-            koneksi = new Koneksi.Koneksi();
+            koneksi = new Koneksi();
         }
 
         public bool CreateUser(string email, string username, string password)

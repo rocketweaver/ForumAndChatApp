@@ -4,14 +4,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ForumApp.Koneksi;
+using ForumApp;
 using System.Text.RegularExpressions;
 
 namespace ForumApp
 {
     class Users
     {
-        private static Koneksi.Koneksi koneksi = new Koneksi.Koneksi();
+        private static Koneksi koneksi = new Koneksi();
 
         public static int UserId { get; private set; }
         public static string Username { get; private set; }

@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace ForumApp
 {
-    public partial class PostForm : Form
+    public partial class Post : Form
     {
         string idPost;
         
         Posts post = new Posts();
         Comments comment = new Comments();
-        public PostForm(string id)
+        public Post(string id)
         {
             idPost = id;
 
