@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -130,26 +131,34 @@ namespace ForumApp
 
         private void LoadComments()
         {
+            flowLayoutComment.Controls.Clear();
+
             comment.postId = idPost;
 
-            DataSet commentData = comment.ReadById();
+            DataSet commentData = comment.ReadByPostId();
 
             foreach (DataRow row in commentData.Tables["comments"].Rows)
             {
+                string idComment = row["id_comment"].ToString();
                 string username = row["username"].ToString();
                 string commentText = row["description"].ToString();
                 string commentDate = ((DateTime)row["comment_date"]).ToString("dd MMMM yyyy - hh:MM");
+
+                bool edited = (bool)row["edited"];
 
                 Panel commentPanel = new Panel();
                 commentPanel.BackColor = Color.WhiteSmoke;
                 commentPanel.BorderStyle = BorderStyle.FixedSingle;
                 commentPanel.Margin = new Padding(13);
+                commentPanel.Width = 250;
                 commentPanel.MaximumSize = new Size(400, int.MaxValue);
+                commentPanel.Tag = idComment;
 
-                commentPanel.ContextMenuStrip = loadContextMenu();
+                // Set the context menu to the panel
+                commentPanel.ContextMenuStrip = LoadContextMenu(username);
 
                 Label authorLabel = new Label();
-                authorLabel.Text = $"{username} - {commentDate}";
+                authorLabel.Text = $"{username} - {(edited ? "Edited " : "")}{commentDate}";
                 authorLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                 authorLabel.AutoSize = true;
                 authorLabel.BackColor = Color.Transparent;
@@ -174,6 +183,7 @@ namespace ForumApp
                 flowLayoutComment.Controls.Add(commentPanel);
             }
         }
+
 
         private void PostForm_Load(object sender, EventArgs e)
         {
@@ -209,69 +219,41 @@ namespace ForumApp
             return result.ToString();
         }
 
-        private ContextMenuStrip loadContextMenu()
+        private ContextMenuStrip LoadContextMenu(string username)
         {
             ContextMenuStrip customContextMenu = new ContextMenuStrip();
             ToolStripMenuItem deleteComment = new ToolStripMenuItem("Delete");
+            ToolStripMenuItem editComment = new ToolStripMenuItem("Edit");
             ToolStripMenuItem reportComment = new ToolStripMenuItem("Report");
 
             deleteComment.Click += deleteComment_Click;
+            editComment.Click += editComment_Click;
             reportComment.Click += reportComment_Click;
 
-            customContextMenu.Items.Add(deleteComment);
-            customContextMenu.Items.Add(reportComment);
+            if (username == Users.Username)
+            {
+                customContextMenu.Items.Add(deleteComment);
+                customContextMenu.Items.Add(editComment);
+            }
+            else
+            {
+                customContextMenu.Items.Add(reportComment);
+            }
 
             return customContextMenu;
         }
 
-        private void MakeComment()
-        {
-            Panel commentPanel = new Panel();
-            commentPanel.BackColor = Color.WhiteSmoke;
-            commentPanel.BorderStyle = BorderStyle.FixedSingle;
-            commentPanel.Margin = new Padding(13);
-            commentPanel.Width = flowLayoutComment.Width - 30;
-            commentPanel.MaximumSize = new Size(flowLayoutComment.Width - 30, 200);
-
-            commentPanel.ContextMenuStrip = loadContextMenu();
-
-            Label authorLabel = new Label();
-            authorLabel.UseCompatibleTextRendering = true;
-
-            string username = Users.Username;
-            string date = DateTime.Now.ToString("dd MMMM yyyy");
-            string hour = DateTime.Now.ToString("hh:MM");
-
-            authorLabel.Text = $"{username} - {date} - {hour}";
-            authorLabel.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-            authorLabel.AutoSize = true;
-            authorLabel.BackColor = Color.Transparent;
-            authorLabel.Padding = new Padding(10, 8, 8, 0);
-
-            commentPanel.Controls.Add(authorLabel);
-
-            Label commentLabel = new Label();
-            commentLabel.Text = InsertNewlines(commentTxt.Text, 70);
-            commentLabel.Font = new Font("Segoe UI", 9);
-            commentLabel.AutoSize = true;
-            commentLabel.BackColor = Color.Transparent;
-            commentLabel.Padding = new Padding(0, 8, 8, 20);
-
-            commentLabel.Location = new Point(10, authorLabel.Bottom + 5);
-
-            commentPanel.Controls.Add(commentLabel);
-
-            int totalHeight = commentLabel.Bottom + commentPanel.Padding.Bottom;
-
-            commentPanel.Height = Math.Min(totalHeight, commentPanel.MaximumSize.Height);
-
-            flowLayoutComment.Controls.Add(commentPanel);
-        }
-
-
         private void commentBtn_Click(object sender, EventArgs e)
         {
-            MakeComment();
+            
+
+            comment.userId = Users.UserId.ToString();
+
+            comment.postId = idPost;
+            comment.description = commentTxt.Text;
+            comment.Create();
+
+            LoadComments();
         }
 
         private void deletePostBtn_Click(object sender, EventArgs e)
@@ -286,7 +268,37 @@ namespace ForumApp
 
         private void deleteComment_Click(object sender, EventArgs e)
         {
-            // Handle the click event for Custom Option 1
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
+            Panel panel = (Panel)strip.SourceControl;
+            comment.id = panel.Tag.ToString();
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this comment?", 
+                                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                comment.id = panel.Tag.ToString();
+                comment.Delete();
+
+                LoadComments();
+            }
+        }
+
+        private void editComment_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
+            Panel panel = (Panel)strip.SourceControl;
+
+            EditCommentDialog edit = new EditCommentDialog(panel.Tag.ToString());
+            edit.CommentEdited += Edit_CommentEdited;
+            edit.ShowDialog();
+        }
+
+        private void Edit_CommentEdited(object sender, EventArgs e)
+        {
+            LoadComments();
         }
 
         private void reportComment_Click(object sender, EventArgs e)

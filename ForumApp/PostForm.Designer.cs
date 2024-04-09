@@ -69,7 +69,7 @@
             this.panel1.Location = new System.Drawing.Point(20, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(493, 446);
+            this.panel1.Size = new System.Drawing.Size(493, 434);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -82,7 +82,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 173);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(491, 271);
+            this.panel2.Size = new System.Drawing.Size(491, 259);
             this.panel2.TabIndex = 4;
             // 
             // panel4
@@ -91,7 +91,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 42);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(491, 89);
+            this.panel4.Size = new System.Drawing.Size(491, 77);
             this.panel4.TabIndex = 5;
             // 
             // panel5
@@ -104,7 +104,7 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(13, 10, 13, 10);
-            this.panel5.Size = new System.Drawing.Size(491, 89);
+            this.panel5.Size = new System.Drawing.Size(491, 77);
             this.panel5.TabIndex = 6;
             // 
             // panel8
@@ -115,7 +115,7 @@
             this.panel8.Location = new System.Drawing.Point(13, 10);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(296, 69);
+            this.panel8.Size = new System.Drawing.Size(296, 57);
             this.panel8.TabIndex = 5;
             // 
             // commentTxt
@@ -127,7 +127,7 @@
             this.commentTxt.Location = new System.Drawing.Point(0, 0);
             this.commentTxt.Margin = new System.Windows.Forms.Padding(2);
             this.commentTxt.Name = "commentTxt";
-            this.commentTxt.Size = new System.Drawing.Size(294, 67);
+            this.commentTxt.Size = new System.Drawing.Size(294, 55);
             this.commentTxt.TabIndex = 1;
             this.commentTxt.Text = "";
             this.commentTxt.TextChanged += new System.EventHandler(this.commentTxt_TextChanged);
@@ -221,7 +221,7 @@
             this.flowLayoutComment.AutoScroll = true;
             this.flowLayoutComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutComment.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutComment.Location = new System.Drawing.Point(0, 131);
+            this.flowLayoutComment.Location = new System.Drawing.Point(0, 119);
             this.flowLayoutComment.Name = "flowLayoutComment";
             this.flowLayoutComment.Size = new System.Drawing.Size(491, 140);
             this.flowLayoutComment.TabIndex = 3;
@@ -340,7 +340,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(533, 518);
+            this.ClientSize = new System.Drawing.Size(533, 506);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
