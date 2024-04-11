@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ForumApp;
 using System.Text.RegularExpressions;
+using System.Data;
+using System.Windows.Forms;
 
 namespace ForumApp
 {
@@ -18,8 +20,14 @@ namespace ForumApp
         public static string Email { get; private set; }
         public static int Level { get; private set; }
 
+        public int id;
+        public string username;
+        public string email;
+        public string password;
+
         public static bool SetUsers(string email, string password)
         {
+
             try
             {
                 koneksi.bukaKoneksi();
@@ -33,7 +41,6 @@ namespace ForumApp
 
                 if (count > 0)
                 {
-                    // Jika autentikasi berhasil, ambil informasi pengguna
                     query = "SELECT id_user, Username, level FROM Users WHERE Email = @Email";
                     command = new SqlCommand(query, koneksi.con);
                     command.Parameters.AddWithValue("@Email", email);
@@ -59,6 +66,46 @@ namespace ForumApp
             {
                 Console.WriteLine("Error during login: " + ex.Message);
                 return false;
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public DataRow ReadById()
+        {
+            DataRow row = null;
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                if (id == null)
+                {
+                    MessageBox.Show("No user related.");
+                    return row;
+                }
+
+                string query = @"SELECT *
+                                FROM users WHERE id_user = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = com.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                if (dt.Rows.Count > 0)
+                {
+                    row = dt.Rows[0];
+                }
+
+                return row;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
             finally
             {

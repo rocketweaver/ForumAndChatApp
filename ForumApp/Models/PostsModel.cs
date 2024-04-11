@@ -351,7 +351,7 @@ namespace ForumApp
             {
                 koneksi.bukaKoneksi();
 
-                string query = "UPDATE posts set title = @title, description = @desc " +
+                string query = "UPDATE posts set title = @title, description = @desc, edited = 1 " +
                                 "WHERE id_post = @id";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
                 com.Parameters.AddWithValue("@title", title);

@@ -95,7 +95,7 @@ namespace ForumApp
         {
             this.Hide();
 
-            Profile profile = new Profile();
+            Profile profile = new Profile(UsersModel.UserId);
             profile.Closed += (s, args) => this.Close();
             profile.Show();
         }
@@ -104,7 +104,7 @@ namespace ForumApp
         {
             this.Hide();
 
-            Profile profile = new Profile();
+            Profile profile = new Profile(UsersModel.UserId);
             profile.Closed += (s, args) => this.Close();
             profile.Show();
         }
@@ -143,6 +143,11 @@ namespace ForumApp
                     MessageBox.Show("Related post doesn't exist.");
                 }
             }   
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

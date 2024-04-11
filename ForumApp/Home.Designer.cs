@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.usernameTxt = new System.Windows.Forms.Label();
             this.logoutBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.userIcon = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPosts = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -40,7 +40,7 @@
             this.searchTxt = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userIcon)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -75,24 +75,24 @@
             this.logoutBtn.UseVisualStyleBackColor = false;
             this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
-            // pictureBox1
+            // userIcon
             // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(24, 27);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(19, 18);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.usernameTxt_Click);
+            this.userIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userIcon.Image = ((System.Drawing.Image)(resources.GetObject("userIcon.Image")));
+            this.userIcon.Location = new System.Drawing.Point(24, 27);
+            this.userIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.userIcon.Name = "userIcon";
+            this.userIcon.Size = new System.Drawing.Size(19, 18);
+            this.userIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.userIcon.TabIndex = 0;
+            this.userIcon.TabStop = false;
+            this.userIcon.Click += new System.EventHandler(this.usernameTxt_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.Controls.Add(this.logoutBtn);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.userIcon);
             this.panel1.Controls.Add(this.usernameTxt);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -198,7 +198,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userIcon)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -210,7 +210,7 @@
         #endregion
         private System.Windows.Forms.Label usernameTxt;
         private System.Windows.Forms.Button logoutBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox userIcon;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPosts;
         private System.Windows.Forms.Panel panel2;

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ForumApp
 {
@@ -21,6 +22,12 @@ namespace ForumApp
             idPost = id;
 
             InitializeComponent();
+        }
+
+        private class CommentIds
+        {
+            public string userId { get; set; }
+            public string commentId { get; set; }
         }
 
         private void postPanel_Paint(object sender, PaintEventArgs e)
@@ -45,8 +52,11 @@ namespace ForumApp
 
             if (postById != null)
             {
+                bool edited = (bool)postById["edited"];
+                string postDate = ((DateTime)postById["post_date"]).ToString("yyyy-MM-dd");
+
                 titleLabel.Text = postById["title"].ToString();
-                dateLabel.Text = ((DateTime)postById["post_date"]).ToString("yyyy-MM-dd");
+                dateLabel.Text = $"{(edited ? "Edited " : "")}{postDate}";
                 authorLabel.Text = "by " + postById["username"].ToString();
                 descLabel.Text = postById["description"].ToString();
 
@@ -156,6 +166,13 @@ namespace ForumApp
                 string username = row["username"].ToString();
                 string commentText = row["description"].ToString();
                 string commentDate = ((DateTime)row["comment_date"]).ToString("dd MMMM yyyy - hh:MM");
+                string userId = row["user_id"].ToString();
+
+                CommentIds commentIds = new CommentIds
+                {
+                    userId = userId,
+                    commentId = idComment
+                };
 
                 bool edited = (bool)row["edited"];
 
@@ -165,7 +182,7 @@ namespace ForumApp
                 commentPanel.Margin = new Padding(13);
                 commentPanel.Width = 250;
                 commentPanel.MaximumSize = new Size(400, int.MaxValue);
-                commentPanel.Tag = idComment;
+                commentPanel.Tag = commentIds;
 
                 commentPanel.ContextMenuStrip = LoadContextMenu(username);
 
@@ -234,21 +251,25 @@ namespace ForumApp
         private ContextMenuStrip LoadContextMenu(string username)
         {
             ContextMenuStrip customContextMenu = new ContextMenuStrip();
+            ToolStripMenuItem userComment = new ToolStripMenuItem("See User Profile");
             ToolStripMenuItem deleteComment = new ToolStripMenuItem("Delete");
             ToolStripMenuItem editComment = new ToolStripMenuItem("Edit");
             ToolStripMenuItem reportComment = new ToolStripMenuItem("Report");
 
+            userComment.Click += userComment_Click;
             deleteComment.Click += deleteComment_Click;
             editComment.Click += editComment_Click;
             reportComment.Click += reportComment_Click;
 
             if (username == UsersModel.Username)
             {
+                customContextMenu.Items.Add(userComment);
                 customContextMenu.Items.Add(deleteComment);
                 customContextMenu.Items.Add(editComment);
             }
             else
             {
+                customContextMenu.Items.Add(userComment);
                 customContextMenu.Items.Add(reportComment);
             }
 
@@ -301,6 +322,23 @@ namespace ForumApp
             postForm.ShowDialog();
         }
 
+        private void userComment_Click(object sender, EventArgs e)
+        {
+            CommentsModel comment = new CommentsModel();
+
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
+            Panel panel = (Panel)strip.SourceControl;
+
+            CommentIds commentIds = (CommentIds)panel.Tag;
+
+            this.Hide();
+
+            Profile profile = new Profile(Convert.ToInt32(commentIds.userId));
+            profile.Closed += (s, args) => this.Close();
+            profile.Show();
+        }
+
         private void deleteComment_Click(object sender, EventArgs e)
         {
             CommentsModel comment = new CommentsModel();
@@ -308,14 +346,17 @@ namespace ForumApp
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
             Panel panel = (Panel)strip.SourceControl;
-            comment.id = panel.Tag.ToString();
+
+            CommentIds commentIds = (CommentIds)panel.Tag;
+
+            comment.id = commentIds.commentId;
 
             DialogResult result = MessageBox.Show("Are you sure you want to delete this comment?", 
                                 "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                comment.id = panel.Tag.ToString();
+                comment.id = commentIds.commentId;
                 comment.Delete();
 
                 LoadComments();
@@ -327,8 +368,9 @@ namespace ForumApp
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
             Panel panel = (Panel)strip.SourceControl;
+            CommentIds commentIds = (CommentIds)panel.Tag;
 
-            EditCommentDialog edit = new EditCommentDialog(panel.Tag.ToString());
+            EditCommentDialog edit = new EditCommentDialog(commentIds.commentId);
             edit.CommentEdited += Edit_CommentEdited;
             edit.ShowDialog();
         }
@@ -343,10 +385,11 @@ namespace ForumApp
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             ContextMenuStrip strip = (ContextMenuStrip)item.Owner;
             Panel panel = (Panel)strip.SourceControl;
+            CommentIds commentIds = (CommentIds)panel.Tag;
             Label authorLabel = (Label)panel.Controls[0];
             string username = authorLabel.Text.Split('-')[0].Trim();
 
-            ReportDialog report = new ReportDialog(username, null, Convert.ToInt32(panel.Tag));
+            ReportDialog report = new ReportDialog(username, null, Convert.ToInt32(commentIds.commentId));
             report.ShowDialog();
         }
 
@@ -417,8 +460,28 @@ namespace ForumApp
 
             ReportDialog report = new ReportDialog(username, Convert.ToInt32(idPost), null);
 
-            MessageBox.Show(idPost);
             report.ShowDialog();
+        }
+
+        private void authorLabel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            PostsModel post = new PostsModel();
+            post.id = idPost;
+
+            DataRow postById = post.ReadById();
+
+            if(postById != null)
+            {
+                Profile profile = new Profile(Convert.ToInt32(postById["user_id"]));
+                profile.Closed += (s, args) => this.Close();
+                profile.Show();
+            } else
+            {
+                MessageBox.Show("No related user exists.");
+            }
+            
         }
     }
 }

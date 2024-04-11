@@ -60,6 +60,7 @@
             // submitBtn
             // 
             this.submitBtn.BackColor = System.Drawing.Color.SteelBlue;
+            this.submitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.submitBtn.FlatAppearance.BorderSize = 0;
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

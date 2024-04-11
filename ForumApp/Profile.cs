@@ -11,10 +11,12 @@ using System.Windows.Forms;
 namespace ForumApp
 {
     public partial class Profile : Form
-    {  
-
-        public Profile()
+    {
+        int id;
+        public Profile(int id)
         {
+            this.id = id;
+
             InitializeComponent();
         }
 
@@ -27,7 +29,7 @@ namespace ForumApp
                 DataSet panelData;
 
                 PostsModel posts = new PostsModel();
-                posts.userId = UsersModel.UserId.ToString();
+                posts.userId = id.ToString();
                 panelData = posts.ReadByUserId();
 
                 foreach (DataRow row in panelData.Tables["posts"].Rows)
@@ -85,7 +87,7 @@ namespace ForumApp
                 DataSet panelData;
 
                 PostsModel posts = new PostsModel();
-                posts.userId = UsersModel.UserId.ToString();
+                posts.userId = id.ToString();
                 panelData = posts.ReadByShare();
 
                 foreach (DataRow row in panelData.Tables["posts"].Rows)
@@ -158,10 +160,22 @@ namespace ForumApp
 
         private void Profile_Load(object sender, EventArgs e)
         {
-            usernameLabel.Text = UsersModel.Username;
+            loggedinUserLabel.Text = UsersModel.Username;
 
-            LoadUserPosts();
-            LoadUserShares();
+            UsersModel user = new UsersModel();
+            user.id = id;
+            DataRow userById = user.ReadById();
+
+            if(userById != null)
+            {
+                usernameLabel.Text = userById["username"].ToString();
+
+                LoadUserPosts();
+                LoadUserShares();
+            } else
+            {
+                MessageBox.Show("No user related exists.");
+            }
         }
 
         private void homeLabel_Click(object sender, EventArgs e)
@@ -181,6 +195,24 @@ namespace ForumApp
             LoginForm login = new LoginForm();
             login.Closed += (s, args) => this.Close();
             login.Show();
+        }
+
+        private void loggedinUserLabel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Profile profile = new Profile(UsersModel.UserId);
+            profile.Closed += (s, args) => this.Close();
+            profile.Show();
+        }
+
+        private void homeLabel_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Home home = new Home();
+            home.Closed += (s, args) => this.Close();
+            home.Show();
         }
     }
 }

@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.logoutBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.homeLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.pictureProfile = new System.Windows.Forms.PictureBox();
@@ -40,12 +39,18 @@
             this.flowLayoutPosts = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPosts = new System.Windows.Forms.TabPage();
             this.flowLayoutShares = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.userIcon = new System.Windows.Forms.PictureBox();
+            this.loggedinUserLabel = new System.Windows.Forms.Label();
+            this.homeLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureProfile)).BeginInit();
             this.postTab.SuspendLayout();
             this.tabShares.SuspendLayout();
             this.tabPosts.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // logoutBtn
@@ -57,9 +62,9 @@
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
-            this.logoutBtn.Location = new System.Drawing.Point(334, 20);
+            this.logoutBtn.Location = new System.Drawing.Point(321, 20);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(80, 32);
+            this.logoutBtn.Size = new System.Drawing.Size(93, 32);
             this.logoutBtn.TabIndex = 1;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -67,6 +72,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.homeLabel);
             this.panel1.Controls.Add(this.logoutBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -75,19 +81,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(20);
             this.panel1.Size = new System.Drawing.Size(434, 72);
             this.panel1.TabIndex = 2;
-            // 
-            // homeLabel
-            // 
-            this.homeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.homeLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.homeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.homeLabel.Location = new System.Drawing.Point(20, 20);
-            this.homeLabel.Name = "homeLabel";
-            this.homeLabel.Size = new System.Drawing.Size(50, 32);
-            this.homeLabel.TabIndex = 2;
-            this.homeLabel.Text = "Home";
-            this.homeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.homeLabel.Click += new System.EventHandler(this.homeLabel_Click);
             // 
             // panel2
             // 
@@ -175,6 +168,55 @@
             this.flowLayoutShares.Size = new System.Drawing.Size(420, 174);
             this.flowLayoutShares.TabIndex = 0;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.userIcon);
+            this.panel3.Controls.Add(this.loggedinUserLabel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(20, 20);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(94, 32);
+            this.panel3.TabIndex = 5;
+            // 
+            // userIcon
+            // 
+            this.userIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userIcon.Image = ((System.Drawing.Image)(resources.GetObject("userIcon.Image")));
+            this.userIcon.Location = new System.Drawing.Point(2, 4);
+            this.userIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.userIcon.Name = "userIcon";
+            this.userIcon.Size = new System.Drawing.Size(19, 18);
+            this.userIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.userIcon.TabIndex = 2;
+            this.userIcon.TabStop = false;
+            this.userIcon.Click += new System.EventHandler(this.loggedinUserLabel_Click);
+            // 
+            // loggedinUserLabel
+            // 
+            this.loggedinUserLabel.AutoSize = true;
+            this.loggedinUserLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loggedinUserLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.loggedinUserLabel.Location = new System.Drawing.Point(30, 7);
+            this.loggedinUserLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.loggedinUserLabel.Name = "loggedinUserLabel";
+            this.loggedinUserLabel.Size = new System.Drawing.Size(60, 15);
+            this.loggedinUserLabel.TabIndex = 3;
+            this.loggedinUserLabel.Text = "Username";
+            this.loggedinUserLabel.Click += new System.EventHandler(this.loggedinUserLabel_Click);
+            // 
+            // homeLabel
+            // 
+            this.homeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.homeLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.homeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.homeLabel.Location = new System.Drawing.Point(100, 20);
+            this.homeLabel.Name = "homeLabel";
+            this.homeLabel.Size = new System.Drawing.Size(221, 32);
+            this.homeLabel.TabIndex = 4;
+            this.homeLabel.Text = "Home";
+            this.homeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.homeLabel.Click += new System.EventHandler(this.homeLabel_Click_1);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +237,9 @@
             this.postTab.ResumeLayout(false);
             this.tabShares.ResumeLayout(false);
             this.tabPosts.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -202,7 +247,6 @@
         #endregion
         private System.Windows.Forms.Button logoutBtn;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label homeLabel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl postTab;
         private System.Windows.Forms.TabPage tabShares;
@@ -211,5 +255,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutShares;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.PictureBox pictureProfile;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox userIcon;
+        private System.Windows.Forms.Label loggedinUserLabel;
+        private System.Windows.Forms.Label homeLabel;
     }
 }

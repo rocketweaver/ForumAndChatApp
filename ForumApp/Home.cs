@@ -152,7 +152,7 @@ namespace ForumApp
         {
             this.Hide();
 
-            Profile profile = new Profile();
+            Profile profile = new Profile(UsersModel.UserId);
             profile.Closed += (s, args) => this.Close();
             profile.Show();
         }
