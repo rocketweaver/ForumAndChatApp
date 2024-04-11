@@ -135,14 +135,35 @@ namespace ForumApp
             try
             {
                 koneksi.bukaKoneksi();
-                string query = "DELETE FROM comments WHERE id_comment = @id;";
-                SqlCommand com = new SqlCommand(query, koneksi.con);
-                com.Parameters.AddWithValue("@id", id);
-                int i = com.ExecuteNonQuery();
+
+                using (SqlTransaction transaction = koneksi.con.BeginTransaction())
+                {
+                    try
+                    {
+                        string deleteReportsQuery = "DELETE FROM reports WHERE comment_id = @id";
+                        SqlCommand deleteReportsCommand = new SqlCommand(deleteReportsQuery, koneksi.con, transaction);
+                        deleteReportsCommand.Parameters.AddWithValue("@id", id);
+                        deleteReportsCommand.ExecuteNonQuery();
+
+                        string deleteCommentQuery = "DELETE FROM comments WHERE id_comment = @id";
+                        SqlCommand deleteCommentCommand = new SqlCommand(deleteCommentQuery, koneksi.con, transaction);
+                        deleteCommentCommand.Parameters.AddWithValue("@id", id);
+                        deleteCommentCommand.ExecuteNonQuery();
+
+                        transaction.Commit();
+
+                        MessageBox.Show("Comment deleted successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Failed to delete comment: " + ex.Message);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Failed to delete comment: " + ex.Message);
             }
             finally
             {
