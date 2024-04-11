@@ -214,5 +214,96 @@ namespace ForumApp
             home.Closed += (s, args) => this.Close();
             home.Show();
         }
+
+        private string PromptPassword()
+        {
+            using (var form = new Form())
+            using (var passwordLabel = new Label())
+            using (var passwordBox = new TextBox())
+            using (var submitButton = new Button())
+            {
+                passwordLabel.Text = "Password:";
+                passwordLabel.Font = new Font("Segoe UI", 9);
+
+                passwordBox.UseSystemPasswordChar = true;
+                passwordBox.Size = new Size(200, 20);
+                passwordBox.BackColor = Color.WhiteSmoke;
+
+                submitButton.Text = "Submit";
+                submitButton.Size = new Size(80, 30);
+                submitButton.Font = new Font("Segoe UI", 9);
+                submitButton.BackColor = Color.SteelBlue;
+                submitButton.ForeColor = Color.White;
+                submitButton.FlatStyle = FlatStyle.Flat;
+                submitButton.FlatAppearance.BorderSize = 0;
+                submitButton.DialogResult = DialogResult.OK;
+                submitButton.Cursor = Cursors.Hand;
+
+                form.Text = "Confirm Password";
+                form.Size = new Size(300, 200);
+                form.FormBorderStyle = FormBorderStyle.FixedSingle;
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.AcceptButton = submitButton;
+                form.CancelButton = submitButton;
+                form.Controls.AddRange(new Control[] { passwordLabel, passwordBox, submitButton });
+                form.BackColor = Color.White;
+
+                int centerX = form.ClientSize.Width / 2;
+                int centerY = form.ClientSize.Height / 2;
+                passwordLabel.Location = new Point(40, centerY - 40);
+                passwordBox.Location = new Point(centerX - passwordBox.Width / 2, centerY - 20);
+                submitButton.Location = new Point(centerX - submitButton.Width / 2, centerY + 15);
+
+                submitButton.Click += (sender, e) =>
+                {
+                    if (string.IsNullOrEmpty(passwordBox.Text))
+                    {
+                        MessageBox.Show("The password is still empty.");
+                        form.DialogResult = DialogResult.None;
+                    }
+                };
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    return passwordBox.Text;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        private void usernameLabel_Click(object sender, EventArgs e)
+        {
+            string password = PromptPassword();
+            UsersModel user = new UsersModel();
+
+            if (!string.IsNullOrEmpty(password))
+            {
+                if (UsersModel.CheckPassword(id, password))
+                {
+                    user.id = id;
+
+                    DataRow userById = user.ReadById();
+
+                    if (userById != null)
+                    {
+                        this.Hide();
+
+                        EditProfile editProfile = new EditProfile(id);
+                        editProfile.Closed += (s, args) => this.Close();
+                        editProfile.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No user related exists.");
+                    }
+                } else
+                {
+                    MessageBox.Show("Incorrect password.");
+                }
+            }
+        }
     }
 }

@@ -152,7 +152,7 @@ namespace ForumApp
 
                         transaction.Commit();
 
-                        MessageBox.Show("Comment deleted successfully.");
+                        MessageBox.Show("Comment has been deleted.");
                     }
                     catch (Exception ex)
                     {

@@ -390,7 +390,7 @@ namespace ForumApp
 
                         transaction.Commit();
 
-                        MessageBox.Show("Post deleted successfully.");
+                        MessageBox.Show("Post has been deleted.");
                     }
                     catch (Exception ex)
                     {

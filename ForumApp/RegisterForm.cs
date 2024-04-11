@@ -20,11 +20,6 @@ namespace ForumApp
            
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtAcc_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -47,9 +42,9 @@ namespace ForumApp
             {
 
                 this.Hide();
-                RegisterForm register = new RegisterForm();
-                register.Closed += (s, args) => this.Close();
-                register.Show();
+                LoginForm login = new LoginForm();
+                login.Closed += (s, args) => this.Close();
+                login.Show();
             }
             else
             {

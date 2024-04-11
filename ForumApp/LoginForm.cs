@@ -35,15 +35,10 @@ namespace ForumApp
                     {
                         MessageBox.Show("Welcome, " + UsersModel.Username + "!");
 
-                        this.Hide();
-                        Home home = new Home();
-                        home.Closed += (s, args) => this.Close();
-                        home.Show();
-
                         if (UsersModel.Level == 1)
                         {
                             this.Hide();
-                        
+                            Home home = new Home();
                             home.Closed += (s, args) => this.Close();
                             home.Show();
                         }
@@ -88,9 +83,8 @@ namespace ForumApp
             this.Hide();
 
             RegisterForm register = new RegisterForm();
-            register.ShowDialog();
-
-            this.Show();
+            register.Closed += (s, args) => this.Close();
+            register.Show();
         }
     }
 }

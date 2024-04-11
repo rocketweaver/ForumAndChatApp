@@ -8,6 +8,7 @@ using ForumApp;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace ForumApp
 {
@@ -73,6 +74,40 @@ namespace ForumApp
             }
         }
 
+        public static bool CheckPassword(int id, string password)
+        {
+
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string query = "SELECT COUNT(*) FROM users WHERE id_user = @id AND password = @password";
+                SqlCommand command = new SqlCommand(query, koneksi.con);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@Password", password);
+
+                int count = (int)command.ExecuteScalar();
+
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
         public DataRow ReadById()
         {
             DataRow row = null;
@@ -112,6 +147,75 @@ namespace ForumApp
                 koneksi.tutupKoneksi();
             }
         }
+
+        public void Update()
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                string query = "UPDATE users set username = @username, email = @email, " +
+                                "password = @password WHERE id_user = @id";
+                SqlCommand com = new SqlCommand(query, koneksi.con);
+                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@username", username);
+                com.Parameters.AddWithValue("@email", email);
+                com.Parameters.AddWithValue("@password", password);
+                int i = com.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
+
+        public void Delete()
+        {
+            try
+            {
+                koneksi.bukaKoneksi();
+
+                using (SqlTransaction transaction = koneksi.con.BeginTransaction())
+                {
+                    try
+                    {
+                        string deleteReportsQuery = "DELETE FROM reports WHERE " +
+                            "(comment_id IN (SELECT id_comment FROM comments WHERE user_id = @id) OR " +
+                            "post_id IN (SELECT id_post FROM posts WHERE user_id = @id))";
+                        SqlCommand deleteReportsCommand = new SqlCommand(deleteReportsQuery, koneksi.con, transaction);
+                        deleteReportsCommand.Parameters.AddWithValue("@id", id);
+                        deleteReportsCommand.ExecuteNonQuery();
+
+                        string deleteUserQuery = "DELETE FROM users WHERE id_user = @id";
+                        SqlCommand deleteUsersCommand = new SqlCommand(deleteUserQuery, koneksi.con, transaction);
+                        deleteUsersCommand.Parameters.AddWithValue("@id", id);
+                        deleteUsersCommand.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                koneksi.tutupKoneksi();
+            }
+        }
     }
+
+    
+
 }
 

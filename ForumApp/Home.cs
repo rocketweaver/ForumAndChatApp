@@ -16,9 +16,6 @@ namespace ForumApp
         public Home()
         {
             InitializeComponent();
-
-            logoutBtn.FlatStyle = FlatStyle.Flat;
-            logoutBtn.FlatAppearance.BorderSize = 0;
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
@@ -119,15 +116,9 @@ namespace ForumApp
         }
 
 
-        private void Home_Load(object sender, EventArgs e)
+        private async void Home_Load(object sender, EventArgs e)
         {
             usernameTxt.Text = UsersModel.Username;
-
-            if (string.IsNullOrEmpty(usernameTxt.Text))
-            {
-                MessageBox.Show("Username is empty.");
-            }
-
             LoadPosts();
         }
 

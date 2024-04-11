@@ -158,7 +158,6 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Email:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // RegisterForm
             // 
