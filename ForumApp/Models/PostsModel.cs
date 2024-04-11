@@ -137,15 +137,24 @@ namespace ForumApp
             DataSet ds = new DataSet();
             try
             {
+                string query;
+
                 if (string.IsNullOrEmpty(keyword))
                 {
                     MessageBox.Show("Please enter a keyword.");
-                    return ds;
+                    query = "SELECT * FROM posts";
+                } else
+                {
+                    query = "SELECT * FROM posts WHERE title LIKE @keyword";
                 }
 
-                string query = "SELECT * FROM posts WHERE title LIKE @keyword";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
-                com.Parameters.AddWithValue("@keyword", "%" + keyword + "%"); // Add wildcard % to search for partial matches
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    com.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+                }
+                
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds, "posts");
             }
@@ -365,19 +374,40 @@ namespace ForumApp
             {
                 koneksi.bukaKoneksi();
 
-                string query = "DELETE FROM posts WHERE id_post = @id";
-                SqlCommand com = new SqlCommand(query, koneksi.con);
-                com.Parameters.AddWithValue("@id", id);
-                int i = com.ExecuteNonQuery();
+                using (SqlTransaction transaction = koneksi.con.BeginTransaction())
+                {
+                    try
+                    {
+                        string deleteReportsQuery = "DELETE FROM reports WHERE post_id = @id";
+                        SqlCommand deleteReportsCommand = new SqlCommand(deleteReportsQuery, koneksi.con, transaction);
+                        deleteReportsCommand.Parameters.AddWithValue("@id", id);
+                        deleteReportsCommand.ExecuteNonQuery();
+
+                        string deletePostQuery = "DELETE FROM posts WHERE id_post = @id";
+                        SqlCommand deletePostCommand = new SqlCommand(deletePostQuery, koneksi.con, transaction);
+                        deletePostCommand.Parameters.AddWithValue("@id", id);
+                        deletePostCommand.ExecuteNonQuery();
+
+                        transaction.Commit();
+
+                        MessageBox.Show("Post deleted successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Failed to delete post: " + ex.Message);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Failed to delete post: " + ex.Message);
             }
             finally
             {
                 koneksi.tutupKoneksi();
             }
         }
+
     }
 }

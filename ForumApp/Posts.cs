@@ -62,7 +62,6 @@ namespace ForumApp
                     likeBtn.Text = "Like (" + postById["like_count"].ToString() + ")";
                 }
 
-                // Always add the editBtn and deletePostBtn
                 panel3.Controls.RemoveByKey("edit");
                 panel3.Controls.RemoveByKey("delete");
 
@@ -168,7 +167,6 @@ namespace ForumApp
                 commentPanel.MaximumSize = new Size(400, int.MaxValue);
                 commentPanel.Tag = idComment;
 
-                // Set the context menu to the panel
                 commentPanel.ContextMenuStrip = LoadContextMenu(username);
 
                 Label authorLabel = new Label();
@@ -348,7 +346,7 @@ namespace ForumApp
             Label authorLabel = (Label)panel.Controls[0];
             string username = authorLabel.Text.Split('-')[0].Trim();
 
-            ReportDialog report = new ReportDialog(username);
+            ReportDialog report = new ReportDialog(username, null, Convert.ToInt32(panel.Tag));
             report.ShowDialog();
         }
 
@@ -411,6 +409,16 @@ namespace ForumApp
             }
 
             LoadPost();
+        }
+
+        private void reportBtn_Click(object sender, EventArgs e)
+        {
+            string username = authorLabel.Text.Split(' ')[1].Trim();
+
+            ReportDialog report = new ReportDialog(username, Convert.ToInt32(idPost), null);
+
+            MessageBox.Show(idPost);
+            report.ShowDialog();
         }
     }
 }

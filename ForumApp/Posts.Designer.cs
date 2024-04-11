@@ -66,10 +66,9 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.postPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(20, 52);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(30, 80);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(493, 407);
+            this.panel1.Size = new System.Drawing.Size(740, 626);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -79,19 +78,19 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.flowLayoutComment);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 173);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(0, 266);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(491, 232);
+            this.panel2.Size = new System.Drawing.Size(738, 358);
             this.panel2.TabIndex = 4;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 42);
+            this.panel4.Location = new System.Drawing.Point(0, 65);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(491, 72);
+            this.panel4.Size = new System.Drawing.Size(738, 111);
             this.panel4.TabIndex = 5;
             // 
             // panel5
@@ -101,10 +100,9 @@
             this.panel5.Controls.Add(this.commentBtn);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(13, 10, 13, 10);
-            this.panel5.Size = new System.Drawing.Size(491, 72);
+            this.panel5.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
+            this.panel5.Size = new System.Drawing.Size(738, 111);
             this.panel5.TabIndex = 6;
             // 
             // panel8
@@ -112,10 +110,9 @@
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.commentTxt);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(13, 10);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Location = new System.Drawing.Point(20, 15);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(296, 52);
+            this.panel8.Size = new System.Drawing.Size(443, 81);
             this.panel8.TabIndex = 5;
             // 
             // commentTxt
@@ -125,9 +122,8 @@
             this.commentTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.commentTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.commentTxt.Location = new System.Drawing.Point(0, 0);
-            this.commentTxt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.commentTxt.Name = "commentTxt";
-            this.commentTxt.Size = new System.Drawing.Size(294, 50);
+            this.commentTxt.Size = new System.Drawing.Size(441, 79);
             this.commentTxt.TabIndex = 1;
             this.commentTxt.Text = "";
             this.commentTxt.TextChanged += new System.EventHandler(this.commentTxt_TextChanged);
@@ -139,10 +135,9 @@
             this.commentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.commentBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.commentBtn.ForeColor = System.Drawing.Color.White;
-            this.commentBtn.Location = new System.Drawing.Point(322, 10);
-            this.commentBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.commentBtn.Location = new System.Drawing.Point(483, 15);
             this.commentBtn.Name = "commentBtn";
-            this.commentBtn.Size = new System.Drawing.Size(156, 29);
+            this.commentBtn.Size = new System.Drawing.Size(234, 45);
             this.commentBtn.TabIndex = 4;
             this.commentBtn.Text = "Comment";
             this.commentBtn.UseVisualStyleBackColor = false;
@@ -155,8 +150,9 @@
             this.panel3.Controls.Add(this.likeBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(491, 42);
+            this.panel3.Size = new System.Drawing.Size(738, 65);
             this.panel3.TabIndex = 4;
             // 
             // shareBtn
@@ -169,10 +165,9 @@
             this.shareBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.shareBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.shareBtn.ForeColor = System.Drawing.Color.White;
-            this.shareBtn.Location = new System.Drawing.Point(169, 0);
-            this.shareBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.shareBtn.Location = new System.Drawing.Point(254, 0);
             this.shareBtn.Name = "shareBtn";
-            this.shareBtn.Size = new System.Drawing.Size(153, 42);
+            this.shareBtn.Size = new System.Drawing.Size(230, 65);
             this.shareBtn.TabIndex = 8;
             this.shareBtn.Text = "Share";
             this.shareBtn.UseVisualStyleBackColor = false;
@@ -188,13 +183,13 @@
             this.reportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.reportBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.reportBtn.ForeColor = System.Drawing.Color.White;
-            this.reportBtn.Location = new System.Drawing.Point(322, 0);
-            this.reportBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reportBtn.Location = new System.Drawing.Point(484, 0);
             this.reportBtn.Name = "reportBtn";
-            this.reportBtn.Size = new System.Drawing.Size(169, 42);
+            this.reportBtn.Size = new System.Drawing.Size(254, 65);
             this.reportBtn.TabIndex = 7;
             this.reportBtn.Text = "Report";
             this.reportBtn.UseVisualStyleBackColor = false;
+            this.reportBtn.Click += new System.EventHandler(this.reportBtn_Click);
             // 
             // likeBtn
             // 
@@ -208,9 +203,8 @@
             this.likeBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.likeBtn.ForeColor = System.Drawing.Color.White;
             this.likeBtn.Location = new System.Drawing.Point(0, 0);
-            this.likeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.likeBtn.Name = "likeBtn";
-            this.likeBtn.Size = new System.Drawing.Size(169, 42);
+            this.likeBtn.Size = new System.Drawing.Size(254, 65);
             this.likeBtn.TabIndex = 6;
             this.likeBtn.Text = "Like";
             this.likeBtn.UseVisualStyleBackColor = false;
@@ -221,9 +215,10 @@
             this.flowLayoutComment.AutoScroll = true;
             this.flowLayoutComment.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutComment.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutComment.Location = new System.Drawing.Point(0, 114);
+            this.flowLayoutComment.Location = new System.Drawing.Point(0, 176);
+            this.flowLayoutComment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flowLayoutComment.Name = "flowLayoutComment";
-            this.flowLayoutComment.Size = new System.Drawing.Size(491, 118);
+            this.flowLayoutComment.Size = new System.Drawing.Size(738, 182);
             this.flowLayoutComment.TabIndex = 3;
             this.flowLayoutComment.WrapContents = false;
             // 
@@ -236,10 +231,9 @@
             this.postPanel.Controls.Add(this.panel6);
             this.postPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.postPanel.Location = new System.Drawing.Point(0, 0);
-            this.postPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.postPanel.Name = "postPanel";
-            this.postPanel.Padding = new System.Windows.Forms.Padding(17, 20, 17, 26);
-            this.postPanel.Size = new System.Drawing.Size(491, 173);
+            this.postPanel.Padding = new System.Windows.Forms.Padding(26, 31, 26, 40);
+            this.postPanel.Size = new System.Drawing.Size(738, 266);
             this.postPanel.TabIndex = 3;
             // 
             // descLabel
@@ -247,11 +241,10 @@
             this.descLabel.AutoSize = true;
             this.descLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.descLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.descLabel.Location = new System.Drawing.Point(17, 81);
-            this.descLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.descLabel.MaximumSize = new System.Drawing.Size(433, 0);
+            this.descLabel.Location = new System.Drawing.Point(26, 125);
+            this.descLabel.MaximumSize = new System.Drawing.Size(650, 0);
             this.descLabel.Name = "descLabel";
-            this.descLabel.Size = new System.Drawing.Size(433, 495);
+            this.descLabel.Size = new System.Drawing.Size(649, 825);
             this.descLabel.TabIndex = 8;
             this.descLabel.Text = resources.GetString("descLabel.Text");
             // 
@@ -259,10 +252,9 @@
             // 
             this.panel7.Controls.Add(this.authorLabel);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(17, 54);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Location = new System.Drawing.Point(26, 83);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(440, 27);
+            this.panel7.Size = new System.Drawing.Size(660, 42);
             this.panel7.TabIndex = 7;
             // 
             // authorLabel
@@ -272,9 +264,8 @@
             this.authorLabel.Font = new System.Drawing.Font("Segoe UI", 7F);
             this.authorLabel.ForeColor = System.Drawing.Color.DimGray;
             this.authorLabel.Location = new System.Drawing.Point(0, 0);
-            this.authorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.authorLabel.Name = "authorLabel";
-            this.authorLabel.Size = new System.Drawing.Size(49, 12);
+            this.authorLabel.Size = new System.Drawing.Size(71, 19);
             this.authorLabel.TabIndex = 7;
             this.authorLabel.Text = "by Author";
             this.authorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -284,11 +275,10 @@
             this.panel6.Controls.Add(this.titleLabel);
             this.panel6.Controls.Add(this.dateLabel);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(17, 20);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Location = new System.Drawing.Point(26, 31);
             this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.panel6.Size = new System.Drawing.Size(440, 34);
+            this.panel6.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.panel6.Size = new System.Drawing.Size(660, 52);
             this.panel6.TabIndex = 6;
             // 
             // titleLabel
@@ -297,10 +287,9 @@
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
             this.titleLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.titleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(0, 3);
-            this.titleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.titleLabel.Location = new System.Drawing.Point(0, 5);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(42, 21);
+            this.titleLabel.Size = new System.Drawing.Size(61, 32);
             this.titleLabel.TabIndex = 7;
             this.titleLabel.Text = "Title";
             // 
@@ -310,10 +299,9 @@
             this.dateLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.dateLabel.Font = new System.Drawing.Font("Segoe UI", 7F);
             this.dateLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.dateLabel.Location = new System.Drawing.Point(377, 3);
-            this.dateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.dateLabel.Location = new System.Drawing.Point(569, 5);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(63, 12);
+            this.dateLabel.Size = new System.Drawing.Size(91, 19);
             this.dateLabel.TabIndex = 6;
             this.dateLabel.Text = "yyyy-MM-dd";
             // 
@@ -326,10 +314,9 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backBtn.ForeColor = System.Drawing.Color.White;
-            this.backBtn.Location = new System.Drawing.Point(20, 17);
-            this.backBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.backBtn.Location = new System.Drawing.Point(30, 26);
             this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(78, 25);
+            this.backBtn.Size = new System.Drawing.Size(117, 38);
             this.backBtn.TabIndex = 2;
             this.backBtn.Text = "Back";
             this.backBtn.UseVisualStyleBackColor = false;
@@ -337,16 +324,15 @@
             // 
             // Posts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(533, 479);
+            this.ClientSize = new System.Drawing.Size(800, 737);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Posts";
-            this.Padding = new System.Windows.Forms.Padding(20, 52, 20, 20);
+            this.Padding = new System.Windows.Forms.Padding(30, 80, 30, 31);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PostForm";
             this.Load += new System.EventHandler(this.PostForm_Load);
