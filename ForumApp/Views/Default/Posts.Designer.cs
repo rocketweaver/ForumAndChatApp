@@ -351,7 +351,7 @@
             this.Name = "Posts";
             this.Padding = new System.Windows.Forms.Padding(20, 52, 20, 20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PostForm";
+            this.Text = "User Post";
             this.Load += new System.EventHandler(this.PostForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

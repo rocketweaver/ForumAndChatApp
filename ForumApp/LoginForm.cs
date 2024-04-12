@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForumApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,26 +33,32 @@ namespace ForumApp
                 if (IsValidEmail(email))
                 {
                     if (UsersModel.SetUsers(email, password))
-                    {
-                        MessageBox.Show("Welcome, " + UsersModel.Username + "!");
+                    {                      
+                        BanModel ban = new BanModel();
+                        ban.UserId = UsersModel.UserId;
 
-                        if (UsersModel.Level == 1)
+                        if (!ban.CheckBan())
                         {
-                            this.Hide();
-                            Home home = new Home();
-                            home.Closed += (s, args) => this.Close();
-                            home.Show();
-                        }
-                        else if (UsersModel.Level == 2)
-                        {
-                            // Open admin form
-                            /*this.Hide();
-                            AdminForm adminForm = new AdminForm();
-                            adminForm.Show();*/
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid user level.");
+                            MessageBox.Show("Welcome, " + UsersModel.Username + "!");
+
+                            if (UsersModel.Level == 1)
+                            {
+                                this.Hide();
+                                Home home = new Home();
+                                home.Closed += (s, args) => this.Close();
+                                home.Show();
+                            }
+                            else if (UsersModel.Level == 2)
+                            {
+                                // Open admin form
+                                /*this.Hide();
+                                AdminForm adminForm = new AdminForm();
+                                adminForm.Show()*/;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid user level.");
+                            }
                         }
                     }
                     else

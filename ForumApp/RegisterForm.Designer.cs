@@ -37,6 +37,8 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pinTxt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -96,7 +98,7 @@
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.submitBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.submitBtn.Location = new System.Drawing.Point(47, 253);
+            this.submitBtn.Location = new System.Drawing.Point(46, 315);
             this.submitBtn.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(270, 35);
@@ -112,7 +114,7 @@
             this.txtAcc.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtAcc.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.txtAcc.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.txtAcc.Location = new System.Drawing.Point(128, 301);
+            this.txtAcc.Location = new System.Drawing.Point(128, 361);
             this.txtAcc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(121, 13);
@@ -159,12 +161,39 @@
             this.label5.Text = "Email:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label3.Location = new System.Drawing.Point(43, 255);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 15);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "PIN:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pinTxt
+            // 
+            this.pinTxt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pinTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pinTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.pinTxt.Location = new System.Drawing.Point(46, 273);
+            this.pinTxt.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pinTxt.Name = "pinTxt";
+            this.pinTxt.Size = new System.Drawing.Size(271, 23);
+            this.pinTxt.TabIndex = 13;
+            this.pinTxt.UseSystemPasswordChar = true;
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(373, 365);
+            this.ClientSize = new System.Drawing.Size(373, 411);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.pinTxt);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPassword);
@@ -195,5 +224,7 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox pinTxt;
     }
 }

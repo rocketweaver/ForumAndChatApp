@@ -180,8 +180,9 @@ namespace ForumApp
                 commentPanel.BackColor = Color.WhiteSmoke;
                 commentPanel.BorderStyle = BorderStyle.FixedSingle;
                 commentPanel.Margin = new Padding(13);
+                commentPanel.AutoSize = true;
                 commentPanel.Width = 250;
-                commentPanel.MaximumSize = new Size(400, int.MaxValue);
+                commentPanel.MaximumSize = new Size(450, int.MaxValue);
                 commentPanel.Tag = commentIds;
 
                 commentPanel.ContextMenuStrip = LoadContextMenu(username);
@@ -194,7 +195,7 @@ namespace ForumApp
                 authorLabel.Padding = new Padding(10, 8, 8, 0);
 
                 Label commentLabel = new Label();
-                commentLabel.Text = InsertNewlines(commentText, 70);
+                commentLabel.Text = InsertNewlines(commentText, 65);
                 commentLabel.Font = new Font("Segoe UI", 9);
                 commentLabel.AutoSize = true;
                 commentLabel.BackColor = Color.Transparent;

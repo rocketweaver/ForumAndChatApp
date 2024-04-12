@@ -37,7 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.repeatPasswordTxt = new System.Windows.Forms.TextBox();
+            this.pinTxt = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Label();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -154,22 +154,22 @@
             this.label3.Location = new System.Drawing.Point(43, 261);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 15);
+            this.label3.Size = new System.Drawing.Size(29, 15);
             this.label3.TabIndex = 23;
-            this.label3.Text = "Repeat Password:";
+            this.label3.Text = "PIN:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // repeatPasswordTxt
+            // pinTxt
             // 
-            this.repeatPasswordTxt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.repeatPasswordTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.repeatPasswordTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.repeatPasswordTxt.Location = new System.Drawing.Point(46, 279);
-            this.repeatPasswordTxt.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.repeatPasswordTxt.Name = "repeatPasswordTxt";
-            this.repeatPasswordTxt.Size = new System.Drawing.Size(271, 23);
-            this.repeatPasswordTxt.TabIndex = 22;
-            this.repeatPasswordTxt.UseSystemPasswordChar = true;
+            this.pinTxt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pinTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pinTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.pinTxt.Location = new System.Drawing.Point(46, 279);
+            this.pinTxt.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pinTxt.Name = "pinTxt";
+            this.pinTxt.Size = new System.Drawing.Size(271, 23);
+            this.pinTxt.TabIndex = 22;
+            this.pinTxt.UseSystemPasswordChar = true;
             // 
             // backBtn
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.repeatPasswordTxt);
+            this.Controls.Add(this.pinTxt);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.passwordTxt);
@@ -242,7 +242,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox repeatPasswordTxt;
+        private System.Windows.Forms.TextBox pinTxt;
         private System.Windows.Forms.Label backBtn;
         private System.Windows.Forms.Button deleteBtn;
     }

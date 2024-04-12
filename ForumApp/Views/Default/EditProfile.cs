@@ -36,6 +36,7 @@ namespace ForumApp
                 usernameTxt.Text = userById["username"].ToString();
                 emailTxt.Text = userById["email"].ToString();   
                 passwordTxt.Text = userById["password"].ToString();
+                pinTxt.Text = userById["pin"].ToString();
             } 
             else
             {
@@ -54,8 +55,7 @@ namespace ForumApp
             string email = emailTxt.Text;
             string password = passwordTxt.Text;
             string username = usernameTxt.Text;
-
-            
+            string pin = pinTxt.Text;
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)  
                 || string.IsNullOrEmpty(password))
@@ -66,34 +66,28 @@ namespace ForumApp
             {
                 if (IsValidEmail(email))
                 {
-                    if (passwordTxt.Text == repeatPasswordTxt.Text)
+                    users.id = id;
+                    users.email = email;
+                    users.username = username;
+                    users.password = password;
+                    users.pin = pin;
+
+                    DialogResult result = MessageBox.Show("Are you sure you want to update your account?",
+                            "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
                     {
-                        users.id = id;
-                        users.email = email;
-                        users.username = username;
-                        users.password = password;
+                        users.Update();
 
-                        DialogResult result = MessageBox.Show("Are you sure you want to update your account?",
-                                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        MessageBox.Show("Your account has been updated.");
 
-                        if (result == DialogResult.Yes)
-                        {
-                            users.Update();
+                        UsersModel.SetUsers("", "");
 
-                            MessageBox.Show("Your account has been updated.");
+                        this.Hide();
 
-                            UsersModel.SetUsers("", "");
-
-                            this.Hide();
-
-                            LoginForm login = new LoginForm();
-                            login.Closed += (s, args) => this.Close();
-                            login.Show();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Your password doesn't match with each other.");
+                        LoginForm login = new LoginForm();
+                        login.Closed += (s, args) => this.Close();
+                        login.Show();
                     }
                 } 
                 else

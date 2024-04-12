@@ -25,6 +25,7 @@ namespace ForumApp
         public string username;
         public string email;
         public string password;
+        public string pin;
 
         public static bool SetUsers(string email, string password)
         {
@@ -74,17 +75,17 @@ namespace ForumApp
             }
         }
 
-        public static bool CheckPassword(int id, string password)
+        public static bool CheckPin(int id, string pin)
         {
 
             try
             {
                 koneksi.bukaKoneksi();
 
-                string query = "SELECT COUNT(*) FROM users WHERE id_user = @id AND password = @password";
+                string query = "SELECT COUNT(*) FROM users WHERE id_user = @id AND pin = @pin";
                 SqlCommand command = new SqlCommand(query, koneksi.con);
                 command.Parameters.AddWithValue("@id", id);
-                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@pin", pin);
 
                 int count = (int)command.ExecuteScalar();
 
@@ -155,13 +156,14 @@ namespace ForumApp
                 koneksi.bukaKoneksi();
 
                 string query = "UPDATE users set username = @username, email = @email, " +
-                                "password = @password WHERE id_user = @id";
+                                "password = @password, pin = @pin WHERE id_user = @id";
                 SqlCommand com = new SqlCommand(query, koneksi.con);
                 com.Parameters.AddWithValue("@id", id);
                 com.Parameters.AddWithValue("@username", username);
                 com.Parameters.AddWithValue("@email", email);
                 com.Parameters.AddWithValue("@password", password);
-                int i = com.ExecuteNonQuery();
+                com.Parameters.AddWithValue("@pin", pin);
+                com.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

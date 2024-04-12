@@ -215,19 +215,19 @@ namespace ForumApp
             home.Show();
         }
 
-        private string PromptPassword()
+        private string PromptPin()
         {
             using (var form = new Form())
-            using (var passwordLabel = new Label())
-            using (var passwordBox = new TextBox())
+            using (var pinLabel = new Label())
+            using (var pinTxt = new TextBox())
             using (var submitButton = new Button())
             {
-                passwordLabel.Text = "Password:";
-                passwordLabel.Font = new Font("Segoe UI", 9);
+                pinLabel.Text = "PIN:";
+                pinLabel.Font = new Font("Segoe UI", 9);
 
-                passwordBox.UseSystemPasswordChar = true;
-                passwordBox.Size = new Size(200, 20);
-                passwordBox.BackColor = Color.WhiteSmoke;
+                pinTxt.UseSystemPasswordChar = true;
+                pinTxt.Size = new Size(200, 20);
+                pinTxt.BackColor = Color.WhiteSmoke;
 
                 submitButton.Text = "Submit";
                 submitButton.Size = new Size(80, 30);
@@ -239,33 +239,33 @@ namespace ForumApp
                 submitButton.DialogResult = DialogResult.OK;
                 submitButton.Cursor = Cursors.Hand;
 
-                form.Text = "Confirm Password";
+                form.Text = "Confirm PIN";
                 form.Size = new Size(300, 200);
                 form.FormBorderStyle = FormBorderStyle.FixedSingle;
                 form.StartPosition = FormStartPosition.CenterParent;
                 form.AcceptButton = submitButton;
                 form.CancelButton = submitButton;
-                form.Controls.AddRange(new Control[] { passwordLabel, passwordBox, submitButton });
+                form.Controls.AddRange(new Control[] { pinLabel, pinTxt, submitButton });
                 form.BackColor = Color.White;
 
                 int centerX = form.ClientSize.Width / 2;
                 int centerY = form.ClientSize.Height / 2;
-                passwordLabel.Location = new Point(40, centerY - 40);
-                passwordBox.Location = new Point(centerX - passwordBox.Width / 2, centerY - 20);
+                pinLabel.Location = new Point(40, centerY - 40);
+                pinTxt.Location = new Point(centerX - pinTxt.Width / 2, centerY - 20);
                 submitButton.Location = new Point(centerX - submitButton.Width / 2, centerY + 15);
 
                 submitButton.Click += (sender, e) =>
                 {
-                    if (string.IsNullOrEmpty(passwordBox.Text))
+                    if (string.IsNullOrEmpty(pinTxt.Text))
                     {
-                        MessageBox.Show("The password is still empty.");
+                        MessageBox.Show("Please enter your PIN.");
                         form.DialogResult = DialogResult.None;
                     }
                 };
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    return passwordBox.Text;
+                    return pinTxt.Text;
                 }
                 else
                 {
@@ -276,12 +276,12 @@ namespace ForumApp
 
         private void usernameLabel_Click(object sender, EventArgs e)
         {
-            string password = PromptPassword();
+            string pin = PromptPin();
             UsersModel user = new UsersModel();
 
-            if (!string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(pin))
             {
-                if (UsersModel.CheckPassword(id, password))
+                if (UsersModel.CheckPin(id, pin))
                 {
                     user.id = id;
 
@@ -301,7 +301,7 @@ namespace ForumApp
                     }
                 } else
                 {
-                    MessageBox.Show("Incorrect password.");
+                    MessageBox.Show("Incorrect PIN.");
                 }
             }
         }

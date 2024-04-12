@@ -42,14 +42,20 @@ namespace ForumApp
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            ReportsModel report = new ReportsModel();
-            report.reporterId = UsersModel.UserId;
-            report.postId = postId;
-            report.commentId = commentId;
-            report.desc = reportTxt.Text;
-            report.Create();
+            if(String.IsNullOrEmpty(reportTxt.Text)) {
+                MessageBox.Show("The input can't be empty.");
+            }
+            else
+            {
+                ReportsModel report = new ReportsModel();
+                report.reporterId = UsersModel.UserId;
+                report.postId = postId;
+                report.commentId = commentId;
+                report.desc = reportTxt.Text;
+                report.Create();
 
-            this.Close();
+                this.Close();
+            }
         }
     }
 }

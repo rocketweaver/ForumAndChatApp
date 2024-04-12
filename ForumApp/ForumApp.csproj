@@ -46,22 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditCommentDialog.cs">
+    <Compile Include="Views\Default\EditCommentDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditCommentDialog.Designer.cs">
+    <Compile Include="Views\Default\EditCommentDialog.Designer.cs">
       <DependentUpon>EditCommentDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditProfile.cs">
+    <Compile Include="Views\Default\EditProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditProfile.Designer.cs">
+    <Compile Include="Views\Default\EditProfile.Designer.cs">
       <DependentUpon>EditProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Home.cs">
+    <Compile Include="Views\Default\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Home.Designer.cs">
+    <Compile Include="Views\Default\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Koneksi\Koneksi.cs" />
@@ -71,25 +71,26 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BanModel.cs" />
     <Compile Include="Models\ReportsModel.cs" />
-    <Compile Include="PostForm.cs">
+    <Compile Include="Views\Default\PostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PostForm.Designer.cs">
+    <Compile Include="Views\Default\PostForm.Designer.cs">
       <DependentUpon>PostForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Posts.cs">
+    <Compile Include="Views\Default\Posts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Posts.Designer.cs">
+    <Compile Include="Views\Default\Posts.Designer.cs">
       <DependentUpon>Posts.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentsModel.cs" />
     <Compile Include="Models\PostsModel.cs" />
-    <Compile Include="Profile.cs">
+    <Compile Include="Views\Default\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Profile.Designer.cs">
+    <Compile Include="Views\Default\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -101,32 +102,32 @@
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="ReportDialog.cs">
+    <Compile Include="Views\Default\ReportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReportDialog.Designer.cs">
+    <Compile Include="Views\Default\ReportDialog.Designer.cs">
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersModel.cs" />
-    <EmbeddedResource Include="EditCommentDialog.resx">
+    <EmbeddedResource Include="Views\Default\EditCommentDialog.resx">
       <DependentUpon>EditCommentDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditProfile.resx">
+    <EmbeddedResource Include="Views\Default\EditProfile.resx">
       <DependentUpon>EditProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Home.resx">
+    <EmbeddedResource Include="Views\Default\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PostForm.resx">
+    <EmbeddedResource Include="Views\Default\PostForm.resx">
       <DependentUpon>PostForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Posts.resx">
+    <EmbeddedResource Include="Views\Default\Posts.resx">
       <DependentUpon>Posts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Profile.resx">
+    <EmbeddedResource Include="Views\Default\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -141,7 +142,7 @@
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportDialog.resx">
+    <EmbeddedResource Include="Views\Default\ReportDialog.resx">
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
