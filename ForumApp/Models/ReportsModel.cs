@@ -12,7 +12,7 @@ namespace ForumApp.Models
 {
     internal class ReportsModel
     {
-        public int id;
+        public int? id;
         public int reporterId;
         public int? postId;
         public int? commentId;

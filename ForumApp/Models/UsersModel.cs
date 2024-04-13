@@ -21,7 +21,7 @@ namespace ForumApp
         public static string Email { get; private set; }
         public static int Level { get; private set; }
 
-        public int id;
+        public int? id;
         public string username;
         public string email;
         public string password;

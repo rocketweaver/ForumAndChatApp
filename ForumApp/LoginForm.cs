@@ -93,5 +93,10 @@ namespace ForumApp
             register.Closed += (s, args) => this.Close();
             register.Show();
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

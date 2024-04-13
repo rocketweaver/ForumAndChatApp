@@ -82,13 +82,22 @@ namespace ForumApp
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            UsersModel.SetUsers("", "");
+            // Tampilkan dialog konfirmasi
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            this.Hide();
+            // Cek hasil dialog
+            if (result == DialogResult.Yes)
+            {
+                // Set pengguna ke kosong dan sembunyikan form saat ini
+                UsersModel.SetUsers("", "");
+                this.Hide();
 
-            LoginForm login = new LoginForm();
-            login.Closed += (s, args) => this.Close();
-            login.Show();
+                // Buat form login baru dan tampilkan
+                LoginForm login = new LoginForm();
+                login.Closed += (s, args) => this.Close(); // Menutup form saat login ditutup
+                login.Show();
+            }
+
         }
 
         private void usernameTxt_Click(object sender, EventArgs e)

@@ -46,6 +46,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\banForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\banForm.Designer.cs">
+      <DependentUpon>banForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CommentAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\CommentAdmin.Designer.cs">
+      <DependentUpon>CommentAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PostAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\PostAdmin.Designer.cs">
+      <DependentUpon>PostAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ReportAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ReportAdmin.Designer.cs">
+      <DependentUpon>ReportAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\userAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\userAdmin.Designer.cs">
+      <DependentUpon>userAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BanViewModel.cs" />
+    <Compile Include="Models\CommentsViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
+    <Compile Include="Models\UsersViewModels.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Views\Default\EditCommentDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +151,24 @@
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersModel.cs" />
+    <EmbeddedResource Include="Admin\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\banForm.resx">
+      <DependentUpon>banForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\CommentAdmin.resx">
+      <DependentUpon>CommentAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\PostAdmin.resx">
+      <DependentUpon>PostAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ReportAdmin.resx">
+      <DependentUpon>ReportAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\userAdmin.resx">
+      <DependentUpon>userAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Default\EditCommentDialog.resx">
       <DependentUpon>EditCommentDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,6 +205,8 @@
     <EmbeddedResource Include="Views\Default\ReportDialog.resx">
       <DependentUpon>ReportDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ForumApp.csproj.AssemblyReference.cache" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -157,6 +219,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
